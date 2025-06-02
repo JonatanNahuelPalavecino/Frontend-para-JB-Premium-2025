@@ -1,0 +1,175 @@
+.footer {
+    padding: 20px 0 20px;
+    background-color: #121212;
+
+    &-row {
+        display: flex;
+        justify-content: space-around;
+        align-items: flex-start;
+        @media(max-width: 768px) {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        &Icons {
+            display: flex;
+        }
+    }
+    
+    &-col {
+        display: flex;
+        flex-direction: column;
+        margin: 1rem;
+        @media(max-width: 768px) {
+            align-items: center;
+        }
+    }
+
+    &-col-width {
+        width: 18%;
+        @media(max-width: 1200px) {
+            width: 210px;
+        }
+        @media(max-width: 768px) {
+            width: 100%;
+        }
+    }
+
+    &-ul {
+        @media(max-width: 768px) {
+            text-align: center;
+        }
+    }
+    
+    &-title {
+        font-family: "Roboto", sans-serif;
+        font-weight: bold;
+        font-size: 1.1rem;
+        margin-bottom: 10px;
+        margin-top: 10px;
+        color: white;
+    }
+
+    &-item {
+        font-family: "Playfair Display", serif;
+        font-size: 1rem;
+        list-style-type: none;
+        margin-top: 5px;
+        color: #a9a9a9;
+    }
+
+    &-link {
+        font-family: "Playfair Display", serif;
+        font-size: 1rem;
+        border: none;
+        background: none;
+        color: #a9a9a9;
+        text-decoration: none;
+        transition: all .2s ease-in;
+        cursor: pointer;
+
+        &:hover{
+            color: #b0976d;
+            transition: all .2s ease-in;
+        }
+    }
+
+    &-nav {
+        text-decoration: none;
+        color: #a9a9a9;
+        transition: all .2s ease-in;
+
+        &:hover {
+            color: #b0976d;
+            transition: all .2s ease-in;
+        }
+    }
+
+    &-boxImg {
+        width: 200px;
+        height: 200px;
+        align-self: center;
+        @media(max-width: 768px) {
+            width: 150px;
+            height: 150px;
+        }
+    }
+    
+    &-img {
+        width: 100%;
+    }
+    
+    &-text {
+        font-family: 'Copperplate', sans-serif;
+        font-size: 1.3rem;
+        text-align: center;
+        color: white;
+        margin: 5px;
+        @media(max-width: 768px) {
+            font-size: 1.1rem;
+        }
+    }
+
+    &-contentRedes {
+        display: flex;
+    }
+
+    &-redes {
+        width: 2rem;
+        height: 2rem;
+        margin-right: 5px;
+    }
+
+    &-boxIcons {
+        margin-right: 1rem;
+        @media(max-width: 768px) {
+            margin: 0 10px;
+        }
+    }
+
+    &-advices {
+        margin: 1rem 0;
+    }
+
+    &-advice {
+        font-family: "Roboto", sans-serif;
+        text-align: center;
+        line-height: 1.2rem;
+        color: white;
+        font-style: italic;
+        font-size: .8rem;
+        margin: 0 0 .5rem 0;
+
+        &Link {
+            text-decoration: none;
+            color: #b0976d;
+        }
+    }
+
+    &-firma {
+        font-family: 'Copperplate', sans-serif;
+        font-size: .8rem;
+        text-align: center;
+        color: white;
+        text-decoration: none;
+        @media(max-width: 768px) {
+            font-size: 0.7rem;
+        }
+    }
+
+    &-rowDes {
+        border-top: 1px solid #a9a9a9;
+        padding-top: 10px;
+        margin-top: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &-logoDes {
+        width: 20px;
+        height: 20px;
+        margin: 0 5px;
+        filter: invert(1);
+    }
+}

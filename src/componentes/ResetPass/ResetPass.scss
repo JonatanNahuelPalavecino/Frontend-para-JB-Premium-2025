@@ -1,0 +1,123 @@
+.resetPass {
+    margin: 6rem auto 2rem auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  
+    &-title {
+      font-family: "Roboto", sans-serif;
+      font-weight: bold;
+      font-size: 2.5rem;
+      text-transform: uppercase;
+      text-align: center;
+      @media (max-width: 768px) {
+        font-size: 2rem;
+      }
+      @media (max-width: 650px) {
+        font-size: 1.6rem;
+      }
+    }
+  
+    &-form {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-color: #dbcb92;
+      border-radius: 10px;
+      width: 600px;
+      margin: 1rem;
+      padding: 1rem 0;
+      @media (max-width: 768px) {
+        width: 500px;
+      }
+      @media (max-width: 650px) {
+        width: 400px;
+      }
+    }
+  
+    &-box {
+      display: flex;
+      flex-direction: column;
+    }
+  
+    &-label {
+      font-family: "Roboto", sans-serif;
+    }
+
+    &-input {
+        width: 250px;
+        height: 45px;
+        margin: 5px;
+        padding-left: 5px;
+        border: none;
+        border-radius: 5px;
+        outline: none;
+        font-family: "Roboto", sans-serif;
+    
+        &:focus {
+          box-shadow: 0 0 0 0.25rem goldenrod;
+        }
+      }
+    
+      &-pass {
+        position: relative;
+        width: 100%;
+        display: flex;
+        align-items: center;
+      }
+    
+      &-visibility {
+        position: absolute;
+        right: -30px;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+    
+        @media (max-width: 550px) {
+          right: 10px;
+        }
+      }
+    
+      &-error {
+        font-family: "Roboto", sans-serif;
+        font-size: .8rem;
+        min-height: 2rem;
+        max-width: 250px;
+        // font-family: "Roboto Flex", serif;
+        color: red;
+        margin: 0.5rem 0 1rem 5px;
+      }
+    
+      &-btns {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 0 1rem 0;
+    
+        @media (max-width: 550px) {
+          flex-direction: column;
+          justify-content: center;
+        }
+      }
+    
+      &-btn {
+        font-family: 'Roboto', sans-serif;
+        font-weight: 700;
+        background-color: rgb(212, 175, 55);
+        color: rgb(255, 255, 255);
+        border: none;
+        border-radius: 5px;
+        padding: .4rem .8rem;
+        text-transform: uppercase;
+        text-decoration: none;
+        margin: 0 1rem;
+        z-index: 0;
+        cursor: pointer;
+    
+        &OtherColor {
+          background-color: #b19129;
+        }
+      }
+}

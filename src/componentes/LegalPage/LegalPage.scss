@@ -1,0 +1,38 @@
+.legalPage {
+  max-width: 1300px;
+  margin: 6rem auto 2rem auto;
+  padding: 10px;
+  text-align: center;
+
+  &-title {
+    font-family: "Roboto", sans-serif;
+    font-weight: bold;
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    text-align: center;
+    @media (max-width: 768px) {
+      font-size: 2rem;
+    }
+    @media (max-width: 650px) {
+      font-size: 1.6rem;
+    }
+  }
+
+  &-box {
+    margin: 40px;
+
+    &Title {
+      font-family: "Roboto", sans-serif;
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: #7d0000;
+    }
+
+    &Desc {
+      font-family: "Roboto", sans-serif;
+      font-size: 16px;
+      white-space: pre-line;
+    }
+  }
+}

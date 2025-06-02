@@ -1,0 +1,50 @@
+.sliderPromo {
+  margin: 4rem auto 2rem;
+  max-width: 1280px;
+  width: 100%;
+  background: radial-gradient(circle,rgba(0, 0, 0, 1) 45%, rgba(106, 27, 26, 1) 93%);
+  padding: 2rem;
+
+  &-item {
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+  }
+
+  &-content {
+    position: relative;
+    border-radius: 1rem;
+    box-shadow: 0px 0px 7px 7px rgba(255, 255, 255, 0.5);
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white; // opcional, puede dejarse bordó si querés
+  }
+
+  &-img {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+    border-radius: 1rem;
+  }
+
+  &-btn {
+    position: absolute;
+    font-weight: 700;
+    background-color: rgb(212, 175, 55);
+    color: rgb(255, 255, 255);
+    border: none;
+    border-radius: 5px;
+    padding: 0.4rem 0.8rem;
+    text-transform: uppercase;
+    text-decoration: none;
+    z-index: 0;
+    cursor: pointer;
+    font-family: "Roboto", sans-serif;
+    left: 50px;
+    bottom: 50px;
+  }
+}

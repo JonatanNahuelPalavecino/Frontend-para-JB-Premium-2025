@@ -1,0 +1,44 @@
+.itemCount {
+    display: flex;
+    align-items: center;
+
+    &-text {
+        font-family: 'Roboto', sans-serif;
+        font-weight: bold;
+    }
+
+    &-counter {
+        width: 30px;
+        height: 30px;
+        //border: 3px solid black;
+        border-radius: 5px;
+        //background-color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Roboto', sans-serif;
+        font-size: 1.2rem;
+        //font-weight: bold;
+    }
+
+    &-btn {
+        width: 30px;
+        height: 30px;
+        //border: 3px solid black;
+        border-radius: 5px;
+        //background-color: black;
+        //color: white;
+        margin: 0 5px;
+        border: none;
+        background-color: transparent;
+        font-family: 'Roboto', sans-serif;
+        font-size: 1.2rem;
+        color: #d4af37;
+        transition: all .2s ease-in-out;
+    
+        &:hover {
+            font-weight: bold;
+            transition: all .2s ease-in-out;
+        }
+    }
+}

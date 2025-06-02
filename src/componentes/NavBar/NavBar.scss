@@ -1,0 +1,122 @@
+.nav {
+  position: fixed;
+  top: 0;
+  z-index: 4;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  &-content {
+    position: relative;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    z-index: 3;
+    @media (max-width: 992px) {
+      justify-content: center;
+    }
+    @media (max-width: 450px) {
+      justify-content: flex-start;
+    }
+  }
+
+  &-bandera {
+    width: 90px;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    overflow: hidden;
+    z-index: 2;
+
+    &Content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      transform: rotate(299deg);
+    }
+  }
+
+  &-lineaRoja {
+    background-color: #cd0d2d;
+    width: 200px;
+    height: calc(30% / 3);
+  }
+
+  &-lineaAmarilla {
+    background-color: #fecb00;
+    width: 200px;
+    height: calc(30% / 3);
+  }
+
+  &-notif {
+    display: flex;
+    justify-content: center;
+    height: 40px;
+    position: absolute;
+    top: 62%;
+    width: 100%;
+    background-color: #121212;
+  }
+
+  &-logo {
+    display: flex;
+    align-items: center;
+  }
+
+  &-img {
+    width: 100px;
+  }
+
+  &-text {
+    font-family: "Copperplate", sans-serif;
+    letter-spacing: 1px;
+    margin: 5px;
+    font-size: 1.3rem;
+    color: white;
+    @media (max-width: 768px) {
+      font-size: 1.1rem;
+    }
+  }
+
+  &-enlace {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    @media (max-width: 992px) {
+      display: none;
+    }
+  }
+
+  &-item {
+    text-transform: uppercase;
+    color: white;
+    font-family: "Roboto", sans-serif;
+    transition: all 0.2s ease-in;
+    padding: .7rem 1rem;
+
+    &:hover {
+      color: #b0976d;
+      transition: all 0.2s ease-in;
+    }
+  }
+
+  &-flex {
+    display: flex;
+    align-items: center;
+  }
+
+  &-burger {
+    position: absolute;
+    top: 30%;
+    right: 0;
+    margin: .5rem;
+    @media (min-width: 993px) {
+      display: none;
+    }
+  }
+}

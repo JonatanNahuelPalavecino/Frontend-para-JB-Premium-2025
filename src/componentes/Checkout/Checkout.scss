@@ -1,0 +1,260 @@
+.checkout {
+  margin: 6rem auto 2rem auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &-title {
+    font-family: "Roboto", sans-serif;
+    font-weight: bold;
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    text-align: center;
+    @media (max-width: 768px) {
+      font-size: 2rem;
+    }
+    @media (max-width: 650px) {
+      font-size: 1.6rem;
+    }
+  }
+
+  &-mandatory {
+    color: red;
+    margin-top: 3rem;
+  }
+
+  &-text {
+    font-family: "Roboto", sans-serif;
+  }
+
+  &-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-evenly;
+  }
+
+  &-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #dbcb92;
+    border-radius: 10px;
+    width: 600px;
+    margin: 1rem;
+    @media (max-width: 768px) {
+      width: 500px;
+    }
+    @media (max-width: 650px) {
+      width: 400px;
+    }
+  }
+
+  &-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 1rem 1rem 0 1rem;
+
+    &Row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  }
+
+  &-box {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &-label {
+    margin: 1rem 0 0.5rem;
+    font-family: "Roboto", sans-serif;
+  }
+
+  &-input {
+    width: 250px;
+    height: 45px;
+    margin: 5px;
+    padding-left: 5px;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    margin-bottom: 1rem;
+    font-family: "Roboto", sans-serif;
+
+
+    &-input:focus {
+      box-shadow: 0 0 0 0.25rem goldenrod;
+    }
+  }
+
+  &-error {
+    font-family: "Roboto", sans-serif;
+    font-size: .8rem;
+    min-height: 2rem;
+    max-width: 250px;
+    color: red;
+    margin: 0.5rem 0 1rem 5px;
+  }
+
+  &-btns {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    margin: 1rem;
+  }
+
+  &-btn,
+  &-totalBtn {
+    font-family: "Roboto", sans-serif;
+    font-weight: 700;
+    background-color: rgb(212, 175, 55);
+    color: rgb(255, 255, 255);
+    border: none;
+    border-radius: 5px;
+    padding: 0.4rem 0.8rem;
+    text-transform: uppercase;
+    text-decoration: none;
+    z-index: 0;
+    cursor: pointer;
+
+    &OtherColor {
+      background-color: #b19129;
+    }
+  }
+
+  &-total {
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+    align-items: center;
+    justify-content: space-evenly;
+    border-radius: 5px;
+    background-color: #dbcb92;
+    width: 320px;
+    min-height: 275px;
+    padding: .5rem;
+    margin: 1rem;
+
+    &Title {
+      font-family: "Roboto", sans-serif;
+      font-weight: bold;
+      margin: .5rem 0;
+    }
+
+    &Img {
+      width: 20px;
+      height: 35px;
+      object-fit: contain;
+      background: white;
+      border-radius: 5px;
+      margin: 0 .5rem;
+    }
+
+    &Text {
+      font-family: "Roboto", sans-serif;
+    }
+
+    &Box {
+      width: 100%;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      padding: .5rem;
+    }
+    
+    &Price {
+      width: 100%;
+      text-align: center;
+      background-color: #b19129;
+      font-family: "Roboto", sans-serif;
+      font-weight: bold;
+      font-size: 1.5rem;
+      color: white;
+    }
+
+    &Btns {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      align-items: center;
+      width: 100%;
+      height: 80px;
+    }
+  }
+
+  &-info {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+
+    &Text {
+      font-family: "Roboto", sans-serif;
+      font-weight: 100;
+      margin: 0 0 1rem;
+    }
+
+    &BoxIcon {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 10%;
+      background-color: #dbcb92;
+      border-radius: 5px 0 0 5px;
+      @media (max-width: 650px) {
+        width: 15%;
+      }
+    }
+
+    &Icon {
+      width: 50px;
+      height: 50px;
+      color: white;
+    }
+
+    &Desc {
+      display: flex;
+      flex-direction: column;
+      width: 70%;
+      padding: 1rem;
+      background-color: #dbcb92;
+      border-radius: 0 5px 5px 0;
+    }
+
+    &Detail {
+      color: #000;
+      list-style-type: none;
+      text-decoration: none;
+    }
+  }
+
+  &-link {
+    min-width: 1200px;
+    height: 80vh;
+    border: none;
+    border-radius: 8px;
+    max-width: 100%;
+    max-height: 100%;
+
+    @media (max-width: 1251px) {
+      min-width: 1000px;
+    }
+
+    @media (max-width: 1051px) {
+      min-width: 750px;
+    }
+
+    @media (max-width: 801px) {
+      min-width: 550px;
+    }
+
+    @media (max-width: 601px) {
+      min-width: 350px;
+    }
+  }
+}

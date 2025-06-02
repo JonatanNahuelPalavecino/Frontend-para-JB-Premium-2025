@@ -1,0 +1,24 @@
+.sidebar {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    justify-content: space-between;
+
+    &-box {
+        display: flex;
+        align-items: center;
+    }
+
+    &-img {
+        width: 30px;
+        height: 30px;
+        object-fit: cover;
+    }
+
+    &-text {
+        font-family: "Copperplate", sans-serif;
+        letter-spacing: 1px;
+        margin: 5px;
+        font-size: .7rem;
+    }
+}

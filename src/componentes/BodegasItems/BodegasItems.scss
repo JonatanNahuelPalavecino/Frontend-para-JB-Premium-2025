@@ -1,0 +1,24 @@
+.bodegasItems {
+    display: flex;
+    justify-content: center;
+}
+
+.splide__pagination {
+    bottom: -2rem;
+}
+
+.splide__arrow > svg {
+    fill: #A60000;
+}
+
+.splide__arrow:hover:not(:disabled) svg {
+    fill: #8a0d0d;
+}
+
+.splide__pagination__page.is-active {
+    background: #A60000;
+}
+
+.splide__pagination__page:hover {
+    background: #A60000;
+}
