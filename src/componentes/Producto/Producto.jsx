@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import "./producto.scss";
+import "./Producto.scss";
 import { Context } from "../Context/Context";
 import { Link } from "react-router-dom";
 import { ItemCount } from "../ItemCount/ItemCount";
