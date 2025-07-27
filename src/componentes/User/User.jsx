@@ -41,6 +41,10 @@ export const User = ({ users, isLoading, error, setUserSelected, setOpen }) => {
               <input disabled className="user-desc" value={user.email} />
             </div>
             <div className="user-box">
+              <p className="user-title">Telefono</p>
+              <input disabled className="user-desc" value={user.telefono ? user.telefono : "No hay datos"} />
+            </div>
+            <div className="user-box">
               <p className="user-title">Edad</p>
               <p className="user-desc">{user.edad}</p>
             </div>

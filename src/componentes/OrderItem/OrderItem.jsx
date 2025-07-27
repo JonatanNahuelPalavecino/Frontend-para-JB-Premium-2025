@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 export const OrderItem = ({
   codigoPostal,
   direccion,
+  moneda,
   estado,
   fecha_creacion,
   items,
@@ -36,12 +37,6 @@ export const OrderItem = ({
     timeStyle: "short",
   });
 
-  const itemsCart = items?.map((item) => ({
-    ...item,
-    foto: item.product?.foto || "",
-    stock_disponible: item.product?.stock_disponible
-  }))
-
   const copyOrder = () => {
     navigator.clipboard.writeText(orderId);
     toast.success("N° de orden copiado en el portapapeles.");
@@ -53,7 +48,7 @@ export const OrderItem = ({
   }
 
   const handleModify = () => {
-    setCart(itemsCart)
+    setCart(items)
     setOrder({
       telefono,
       direccion,
@@ -101,7 +96,7 @@ export const OrderItem = ({
             </div>
             <div className="order-box">
               <p className="order-title">Telefono</p>
-              <p className="order-desc">{telefono}</p>
+              <p className="order-desc">{telefono ? telefono : "No hay datos"}</p>
             </div>
             <div className="order-box">
               <p className="order-title">Direccion</p>
@@ -121,7 +116,7 @@ export const OrderItem = ({
             </div>
             <div className="order-box">
               <p className="order-title">Total</p>
-              <p className="order-desc">ARS ${total}</p>
+              <p className="order-desc">{moneda === "ARS" ? "AR$" : "U$S"} {total}</p>
             </div>
             <div className="order-box">
               <p className="order-title">Creado el</p>
@@ -188,13 +183,13 @@ export const OrderItem = ({
         </div>
         <div className={expand ? "order-items order-items-expand" : "order-items"}>
           {
-            itemsCart?.map((item) => (
+            items?.map((item) => (
               <div key={item.productoId} className="order-items-container">
                 <div className="order-items-boxImg">
                   <img className="order-items-img" src={item.foto} alt={item.nombre} />
                 </div>
                 <p className="order-items-desc"><strong>Producto:</strong> {item.nombre}</p>
-                <p className="order-items-desc"><strong>Precio:</strong> ${item.precio}</p>
+                <p className="order-items-desc"><strong>Precio:</strong> {moneda === "ARS" ? `AR$ ${item.precioEnPesos}` : `U$S ${item.precio}`}</p>
                 <p className="order-items-desc"><strong>Cantidad:</strong> {item.cantidad}</p>
               </div>
             ))

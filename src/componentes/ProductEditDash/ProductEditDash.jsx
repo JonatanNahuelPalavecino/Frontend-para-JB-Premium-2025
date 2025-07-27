@@ -24,6 +24,7 @@ export const ProductEditDash = () => {
   const inputPdfText = useRef();
 
   useEffect(() => {
+    document.title = "Edición del Producto - JB Premium - Vinos Españoles - Distribuidor Oficial";
     fetchData(`${url}/products/${productoId}`);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [productoId]);
@@ -84,7 +85,7 @@ export const ProductEditDash = () => {
 
   const handleRemovePdf = () => {
     setPreviewPdf("");
-    setForm((prev) => ({ ...prev, pdf: "", deletePdf: true }));
+    setForm((prev) => ({ ...prev, pdf: "", deletePdf: 1 }));
     if (pdfInputRef.current) pdfInputRef.current.value = "";
     if (inputPdfText.current)
       inputPdfText.current.innerText = "No hay ningún archivo.";

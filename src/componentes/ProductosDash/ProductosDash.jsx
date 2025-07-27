@@ -18,9 +18,6 @@ export const ProductosDash = () => {
   const [open, setOpen] = useState(false);
   const [productSelected, setProductSelected] = useState(null);
   const [type, setType] = useState(null);
-  const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
-  const limit = 10;
   const [reload, setReload] = useState(false)
 
   const initialState = {
@@ -39,12 +36,11 @@ export const ProductosDash = () => {
   const fetchProducts = async (filters = {}) => {
     setIsLoading(true);
     try {
-      const res = await getProducts(filters, page, limit);
+      const res = await getProducts(filters);
       setProducts(res.products);
-      setTotalPages(Math.ceil(res.total / limit));
 
       if (Object.keys(filters).length === 0) {
-        const res = await getProducts({}, 1, 100);
+        const res = await getProducts({});
         setAllProducts(res.products);
       }
     } catch (error) {
@@ -55,44 +51,21 @@ export const ProductosDash = () => {
   };
 
   useEffect(() => {
-    fetchProducts(filters, page);
+    document.title = "Gestión de Productos - JB Premium - Vinos Españoles - Distribuidor Oficial";
+    fetchProducts(filters);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filters, page, reload]);
+  }, [filters, reload]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const newFilters = {};
-
-    for (const key in state) {
-      const value = state[key];
-
-      if (key === "nombre" && value.trim() !== "") {
-        newFilters[key] = {
-          contains: value.trim(),
-          mode: "insensitive",
-        };
-      } else if (key === "porcDesc" && value !== "") {
-        if (value === "true") {
-          newFilters[key] = { gt: 0 };
-        } else if (value === "false") {
-          newFilters[key] = { equals: 0 }; // o lte: 0 si preferís
-        }
-      } else if (
-        ["activo", "accesorio", "destacado"].includes(key) &&
-        value !== ""
-      ) {
-        newFilters[key] = value === "true";
-      }
-    }
-
-    setFilters(newFilters);
+    setFilters(state);
   };
 
   const deleteFilters = () => {
-    onResetForm(); // Usar resetForm del hook useForm
+    onResetForm();
     setFilters({});
-    setProducts(allProducts); // Restablecer a todos los usuarios
+    setProducts(allProducts);
   };
 
   const handleDelete = () => {
@@ -183,10 +156,10 @@ export const ProductosDash = () => {
               <option className="productsDash-label" value="">
                 Ver todos
               </option>
-              <option className="productsDash-label" value={true}>
+              <option className="productsDash-label" value={1}>
                 Filtrar productos activos
               </option>
-              <option className="productsDash-label" value={false}>
+              <option className="productsDash-label" value={0}>
                 Filtrar productos inactivos
               </option>
             </select>
@@ -205,10 +178,10 @@ export const ProductosDash = () => {
               <option className="productsDash-label" value="">
                 Ver todos
               </option>
-              <option className="productsDash-label" value={true}>
+              <option className="productsDash-label" value={1}>
                 Filtrar por accesorios
               </option>
-              <option className="productsDash-label" value={false}>
+              <option className="productsDash-label" value={0}>
                 Filtrar por vinos
               </option>
             </select>
@@ -227,10 +200,10 @@ export const ProductosDash = () => {
               <option className="productsDash-label" value="">
                 Ver todos
               </option>
-              <option className="productsDash-label" value={true}>
+              <option className="productsDash-label" value={1}>
                 Filtrar productos con descuento
               </option>
-              <option className="productsDash-label" value={false}>
+              <option className="productsDash-label" value={0}>
                 Filtrar productos sin descuento
               </option>
             </select>
@@ -249,10 +222,10 @@ export const ProductosDash = () => {
               <option className="productsDash-label" value="">
                 Ver todos
               </option>
-              <option className="productsDash-label" value={true}>
+              <option className="productsDash-label" value={1}>
                 Filtrar productos destacados
               </option>
-              <option className="productsDash-label" value={false}>
+              <option className="productsDash-label" value={0}>
                 Filtrar productos no destacados
               </option>
             </select>
@@ -280,25 +253,6 @@ export const ProductosDash = () => {
             setOpen={setOpen}
           />
         </ul>
-        <div className="productsDash-pagination">
-          <button
-            disabled={page === 1}
-            onClick={() => setPage((prev) => prev - 1)}
-            className="productsDash-paginationBtn"
-          >
-            Anterior
-          </button>
-          <span className="productsDash-paginationDesc">
-            Página {page} de {totalPages}
-          </span>
-          <button
-            disabled={page === totalPages}
-            onClick={() => setPage((prev) => prev + 1)}
-            className="productsDash-paginationBtn"
-          >
-            Siguiente
-          </button>
-        </div>
       </section>
       <ModalContainer open={open} onClose={() => setOpen(false)}>
         {type === "ver_foto" ? (

@@ -49,7 +49,7 @@ export const CartContainer = () => {
           <div className="cartContainer-total">
             <em className="cartContainer-totalTitle">Resumen de mi compra:</em>
             <div className="cartContainer-totalBox">
-              <p className="cartContainer-totalPrice">TOTAL: ${totalCart()}</p>
+              <p className="cartContainer-totalPrice">TOTAL: ${totalCart("ARS")}</p>
             </div>
             <div className="cartContainer-totalBtns">
               <button className="cartContainer-btn" onClick={emptyCart}>

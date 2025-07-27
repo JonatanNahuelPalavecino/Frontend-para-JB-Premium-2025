@@ -6,13 +6,13 @@ export const Productos = ({
   isLoading,
   error,
   productos,
-  dolarOficial,
   type,
 }) => {
+  
   const data = productos?.products?.filter((producto) =>
     type === "vinos"
-      ? producto.accesorio === false && producto.activo
-      : producto.accesorio === true && producto.activo
+      ? producto.accesorio == false && producto.activo
+      : producto.accesorio == true && producto.activo
   );
 
   return (
@@ -45,7 +45,6 @@ export const Productos = ({
             <Item
               key={producto.productoId}
               {...producto}
-              dolarOficial={dolarOficial}
             />
           ))}
         </div>

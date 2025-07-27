@@ -7,10 +7,13 @@ export const updateProduct = async (form, setLoading, navigate) => {
     const formData = new FormData();
 
     Object.entries(form).forEach(([key, value]) => {
-      if (value instanceof File) {
-        formData.append(key, value);
-      } else {
-        formData.append(key, value);
+      
+      if (key !== "precioEnPesos") {
+        if (value instanceof File) {
+          formData.append(key, value);
+        } else {
+          formData.append(key, value);
+        }
       }
     });
 

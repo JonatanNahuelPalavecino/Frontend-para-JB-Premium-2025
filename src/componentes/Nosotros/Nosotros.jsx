@@ -1,8 +1,14 @@
+import { useEffect } from "react";
 import { FlyerEnvio } from "../Flyer/FlyerEnvio";
 import { bodegas } from "../utils/datos/bodegas";
 import "./Nosotros.scss";
 
 export const Nosotros = () => {
+
+  useEffect(() => {
+    document.title = "Nosotros - JB Premium - Vinos Españoles - Distribuidor Oficial"
+
+  }, [])
   return (
     <>
       <main className="nosotros">

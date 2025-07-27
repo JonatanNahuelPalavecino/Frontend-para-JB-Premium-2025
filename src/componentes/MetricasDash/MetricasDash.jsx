@@ -36,6 +36,8 @@ export const MetricasDash = () => {
   };
 
   useEffect(() => {
+    document.title = "Métricas - JB Premium - Vinos Españoles - Distribuidor Oficial";
+
     fetchData();
   }, []);
 

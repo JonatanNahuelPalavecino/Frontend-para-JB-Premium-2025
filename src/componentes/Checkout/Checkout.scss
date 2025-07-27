@@ -63,16 +63,42 @@
       flex-wrap: wrap;
       justify-content: center;
     }
+
+    &Check {
+      margin: 2rem 0;
+    }
   }
 
   &-box {
     display: flex;
     flex-direction: column;
+
+    &Check {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+
+      & > span {
+        font-family: "Roboto", sans-serif;
+      }
+    }
   }
 
   &-label {
     margin: 1rem 0 0.5rem;
     font-family: "Roboto", sans-serif;
+
+    &Check {
+      display: block;
+      cursor: pointer;
+      width: 30px;
+      height: 30px;
+      border: 3px solid rgba(255, 255, 255, 0);
+      border-radius: 10px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0px 0px 0px 2px #fff;
+    }
   }
 
   &-input {
@@ -86,15 +112,36 @@
     margin-bottom: 1rem;
     font-family: "Roboto", sans-serif;
 
-
     &-input:focus {
       box-shadow: 0 0 0 0.25rem goldenrod;
     }
+
+    &Check {
+      position: absolute;
+      left: 50px;
+      visibility: hidden;
+
+      &:checked + .checkout-transition {
+        left: -10px;
+        top: -10px;
+      }
+    }
+  }
+
+  &-transition {
+    width: 60px;
+    height: 60px;
+    background-color: goldenrod;
+    top: -52px;
+    left: -52px;
+    position: absolute;
+    transform: rotateZ(45deg);
+    transition: 300ms ease;
   }
 
   &-error {
     font-family: "Roboto", sans-serif;
-    font-size: .8rem;
+    font-size: 0.8rem;
     min-height: 2rem;
     max-width: 250px;
     color: red;
@@ -137,13 +184,13 @@
     background-color: #dbcb92;
     width: 320px;
     min-height: 275px;
-    padding: .5rem;
+    padding: 0.5rem;
     margin: 1rem;
 
     &Title {
       font-family: "Roboto", sans-serif;
       font-weight: bold;
-      margin: .5rem 0;
+      margin: 0.5rem 0;
     }
 
     &Img {
@@ -152,7 +199,7 @@
       object-fit: contain;
       background: white;
       border-radius: 5px;
-      margin: 0 .5rem;
+      margin: 0 0.5rem;
     }
 
     &Text {
@@ -164,9 +211,9 @@
       display: flex;
       justify-content: flex-start;
       align-items: center;
-      padding: .5rem;
+      padding: 0.5rem;
     }
-    
+
     &Price {
       width: 100%;
       text-align: center;

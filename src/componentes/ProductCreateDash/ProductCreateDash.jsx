@@ -1,7 +1,7 @@
 import "./ProductCreateDash.scss";
 import useForm from "../Hooks/useForm";
 import { useNavigate } from "react-router-dom";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { createProduct } from "../utils/peticiones/createProduct";
 import { Context } from "../Context/Context";
 
@@ -9,9 +9,9 @@ export const ProductCreateDash = () => {
   const navigate = useNavigate();
   const { setLoading } = useContext(Context);
 
-  const [previewFoto, setPreviewFoto] = useState("https://res.cloudinary.com/dabgfr6qn/image/upload/v1747844078/no-image_sbf6dg.png");
-  const [previewPdf, setPreviewPdf] = useState("https://res.cloudinary.com/dabgfr6qn/image/upload/v1747844078/no-image_sbf6dg.png");
-  const [previewFotoPromo, setPreviewFotoPromo] = useState("https://res.cloudinary.com/dabgfr6qn/image/upload/v1747844078/no-image_sbf6dg.png");
+  const [previewFoto, setPreviewFoto] = useState("https://res.cloudinary.com/dabgfr6qn/image/upload/v1753556664/no-image-available-icon-vector_qdmgee.jpg");
+  const [previewPdf, setPreviewPdf] = useState("https://res.cloudinary.com/dabgfr6qn/image/upload/v1753556664/no-image-available-icon-vector_qdmgee.jpg");
+  const [previewFotoPromo, setPreviewFotoPromo] = useState("https://res.cloudinary.com/dabgfr6qn/image/upload/v1753556664/no-image-available-icon-vector_qdmgee.jpg");
 
   const initialState = {
     nombre: "",
@@ -77,6 +77,10 @@ export const ProductCreateDash = () => {
     { name: "vino", title: "Vino", type: "text" },
     { name: "detalle", title: "Detalle (para accesorios)", type: "text" },
   ];
+
+  useEffect(() => {
+    document.title = "Creación de Productos - JB Premium - Vinos Españoles - Distribuidor Oficial";
+  }, [])
 
   const handleSubmit = (e) => {
     e.preventDefault();

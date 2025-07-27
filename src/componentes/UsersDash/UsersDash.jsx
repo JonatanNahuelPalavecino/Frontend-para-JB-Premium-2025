@@ -47,25 +47,14 @@ export const UsersDash = () => {
 
   useEffect(() => {
     fetchUsers(filters);
+      document.title = "Gestión de Usuarios - JB Premium - Vinos Españoles - Distribuidor Oficial";
+
   }, [filters]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const newFilters = {};
-    for (const key in state) {
-      const value = state[key].trim();
-      if (value !== "") {
-        newFilters[key] = {
-          contains: value,
-          mode: "insensitive", // hace que no distinga entre mayúsculas y minúsculas
-        };
-      }
-    }
-
-    console.log(newFilters);
-
-    setFilters(newFilters);
+    setFilters(state);
   };
 
   const activarUsuario = async (email, setLoading) => {
@@ -84,7 +73,6 @@ export const UsersDash = () => {
 
   const desactivarUsuario = async (email, setLoading) => {
     const res = await desactivateUser(email, setLoading);
-    console.log(res);
     if (res.estado === "error") {
       toast.error(res.mensaje);
       return;

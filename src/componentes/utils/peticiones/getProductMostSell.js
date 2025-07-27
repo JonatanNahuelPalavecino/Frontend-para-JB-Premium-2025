@@ -95,7 +95,7 @@ export const getSeccionWithMoreVisit = async () => {
         // console.log(data?.visits)
 
         data?.visits.forEach(visit => {
-            const ruta = visit.ruta
+            const ruta = visit.productoNombre ? `Producto: ${visit.productoNombre}` : visit.ruta
             if (seccionesConVisitas[ruta]) {
                 seccionesConVisitas[ruta] ++
             } else {

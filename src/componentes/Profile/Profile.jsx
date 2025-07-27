@@ -16,22 +16,26 @@ export const Profile = () => {
   const initialState = {
     nombre: user?.nombre || "",
     apellido: user?.apellido || "",
+    edad: user?.edad || "",
+    telefono: user?.telefono || ""
   };
 
   const { state, onInputChange, onResetForm } = useForm(initialState);
-  const { nombre, apellido } = state;
+  const { nombre, apellido, edad, telefono } = state;
 
   useEffect(() => {
     if (!user?.userId) {
       return navigate("/");
     }
+    document.title = "Mi Perfil - JB Premium - Vinos Españoles - Distribuidor Oficial"
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const verificarForm = verifyForm(state);
+    
+    const verificarForm = verifyForm(state, "modify-user");
 
     if (verificarForm.estado === "error") {
       setErr(verificarForm.error);
@@ -40,6 +44,8 @@ export const Profile = () => {
 
     setErr();
     onResetForm();
+
+    console.log(verificarForm)
 
     const data = await putUser(user?.userId, setLoading, verificarForm.values);
 
@@ -54,7 +60,7 @@ export const Profile = () => {
     toast.success(`${data.mensaje} Inicia sesión nuevamente.`)
     postLogOut(toast, setLoading)
     setTimeout(() => {
-      navigate("/auth")
+      navigate("/inicio-sesion")
     }, 500)
   };
 
@@ -94,6 +100,40 @@ export const Profile = () => {
               onChange={onInputChange}
             />
             <p className="profile-error">{err ? err.apellido : ""}</p>
+          </div>
+        </div>
+        <div className="profile-box">
+          <label className="profile-label" htmlFor="edad">
+            Edad
+          </label>
+          <div>
+            <input
+              className="profile-input"
+              type="number"
+              id="edad"
+              name="edad"
+              value={edad}
+              disabled={change}
+              onChange={onInputChange}
+            />
+            <p className="profile-error">{err ? err.edad : ""}</p>
+          </div>
+        </div>
+        <div className="profile-box">
+          <label className="profile-label" htmlFor="telefono">
+            telefono
+          </label>
+          <div>
+            <input
+              className="profile-input"
+              type="text"
+              id="telefono"
+              name="telefono"
+              value={telefono}
+              disabled={change}
+              onChange={onInputChange}
+            />
+            <p className="profile-error">{err ? err.telefono : ""}</p>
           </div>
         </div>
         <div className="profile-box">

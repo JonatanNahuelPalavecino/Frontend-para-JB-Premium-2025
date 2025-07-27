@@ -10,7 +10,7 @@ export const verifyToken = async (setUser) => {
     });
 
     const data = await response.json();
-
+    
     if (data.estado === "success") {
       setUser(data.user[0]);
     } else {

@@ -20,11 +20,7 @@ export const Dashboard = () => {
     checkAuth();
   }, [location.pathname, setUser, navigate]);
 
-  // Cambiar título y redireccionar si no es admin
   useEffect(() => {
-    document.title =
-      "Dashboard - JB Premium - Vinos Españoles - Distribuidor Oficial";
-
     if (user?.rol !== "admin") {
       navigate("/");
     }

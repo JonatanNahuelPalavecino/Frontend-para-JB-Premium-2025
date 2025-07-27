@@ -4,7 +4,7 @@ import { Context } from "../Context/Context";
 import "./CartList.scss"
 import { ItemCount } from "../ItemCount/ItemCount";
 
-export const CartList = ({ productoId, nombre, cantidad, precio, foto, stock_disponible }) => {
+export const CartList = ({ productoId, nombre, cantidad, precioEnPesos, foto, stock_disponible }) => {
   const { deleteItemsCart, updateItemToCart } = useContext(Context);
   const [counter, setCounter] = useState(cantidad)
 
@@ -23,7 +23,7 @@ export const CartList = ({ productoId, nombre, cantidad, precio, foto, stock_dis
         {nombre}
       </p>
       <p className="cart-desc">
-        <strong>Precio:</strong> AR$ {precio} c/u
+        <strong>Precio:</strong> AR$ {precioEnPesos} c/u
       </p>
       <ItemCount
         max={stock_disponible}

@@ -1,22 +1,22 @@
 import { Link } from "react-router-dom";
 import "./Item.scss";
+import { useContext } from "react";
+import { Context } from "../Context/Context";
 
 export const Item = ({
   productoId,
   nombre,
-  precio,
+  precio,         //dolares
+  precioEnPesos,  //pesos argentinos
   foto,
   bodega,
   tipo,
   cosecha,
   porcDesc,
   detalle,
-  dolarOficial
 }) => {
 
-  const precioFinal = Math.round(precio > 0 ? precio * dolarOficial : 0);
-  const precioConDescuento = Math.round(precio > 0 ? precio - precio * (porcDesc / 100) : 0);
-  const precioFinalConDescuento = Math.round(precioFinal > 0 ? precioFinal - precioFinal * (porcDesc / 100) : 0);
+  const {calcularDescuento} = useContext(Context)
 
   return (
     <div className="item">
@@ -51,22 +51,22 @@ export const Item = ({
           </em>
         )}
 
-        {precio !== 0 ? (
+        {precio !== 0 || precioEnPesos !== 0 ? (
           <>
             {porcDesc > 0 ? (
               <>
                 <p className="item-price tachado">
-                {`U$S ${precio} BNA / AR$ ${precioFinal} c/u`}
+                {`U$S ${precio} BNA / AR$ ${precioEnPesos} c/u`}
 
                 </p>
                 <p className="item-price">
-                {`U$S ${precioConDescuento} BNA / AR$ ${precioFinalConDescuento} c/u`}
+                {`U$S ${calcularDescuento(precio, porcDesc)} BNA / AR$ ${calcularDescuento(precioEnPesos, porcDesc)} c/u`}
 
                 </p>
               </>
             ) : (
               <p className="item-price">
-                {`U$S ${precio} BNA / AR$ ${precioFinal} c/u`}
+                {`U$S ${precio} BNA / AR$ ${precioEnPesos} c/u`}
               </p>
             )}
             <Link to={`/detalle/${productoId}`}>

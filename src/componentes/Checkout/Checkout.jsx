@@ -11,15 +11,19 @@ import { postOrder } from "../utils/peticiones/postOrder";
 import { toast } from "sonner";
 import { ModalContainer } from "../ModalContainer/ModalContainer";
 import { putOrder } from "../utils/peticiones/putOrder";
+import { MercadoPago } from "../utils/icons/MercadoPago";
+import { PayPal } from "../utils/icons/PayPal";
 
 export const Checkout = () => {
   const navigate = useNavigate();
   const iframeRef = useRef(null);
-  const { user, cart, setCart, totalCart, setLoading, order, setOrder } = useContext(Context);
-  const [open, setOpen] = useState(false)
-  const [link, setLink] = useState(null)
+  const { user, cart, setCart, totalCart, setLoading, order, setOrder } =
+    useContext(Context);
+  const [open, setOpen] = useState(false);
+  const [metodoPago, setMetodoPago] = useState("mercado_pago");
+  const [link, setLink] = useState(null);
   const [err, setErr] = useState();
-  const VITE_FRONTEND =import.meta.env.VITE_FRONTEND
+  const VITE_FRONTEND = import.meta.env.VITE_FRONTEND;
   const initialState = {
     nombre: user?.nombre,
     apellido: user?.apellido,
@@ -54,38 +58,37 @@ export const Checkout = () => {
 
   useEffect(() => {
     if (!link || !open) return;
-  
+
     const interval = setInterval(() => {
-      
       if (!iframeRef) return;
-  
+
       try {
         const currentUrl = iframeRef.current?.contentWindow?.location.href;
         if (currentUrl?.includes(VITE_FRONTEND)) {
           const urlObject = new URL(currentUrl);
           const path = urlObject.pathname;
-  
+
           clearInterval(interval);
 
           if (path.includes("pago-realizado")) {
-            toast.success("Pago realizado de forma exitosa.")
-            navigate("/pago-realizado")
+            toast.success("Pago realizado de forma exitosa.");
+            navigate("/pago-realizado");
           } else if (path.includes("pago-rechazado")) {
-            toast.error("Pago rechazado.")
-            navigate("/pago-rechazado")
+            toast.error("Pago rechazado.");
+            navigate("/pago-rechazado");
           } else if (path.includes("pago-pendiente")) {
-            toast.warning("Pago pendiente.")
-            navigate("/pago-pendiente")
+            toast.warning("Pago pendiente.");
+            navigate("/pago-pendiente");
           } else {
-            navigate("/mis-ordenes")
+            navigate("/mis-ordenes");
           }
         }
       } catch (err) {
-        console.log(err)
+        console.log("Error en Checkout.js - Linea 87", err);
         // No hacemos nada. Esto puede pasar por seguridad entre dominios.
       }
     }, 1000);
-  
+
     return () => clearInterval(interval);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [link, open, VITE_FRONTEND]);
@@ -93,9 +96,8 @@ export const Checkout = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    
     const verificarForm = verifyForm(state, "checkout");
-    
+
     if (verificarForm.estado === "error") {
       setErr(verificarForm.error);
       return;
@@ -103,13 +105,25 @@ export const Checkout = () => {
 
     setErr();
     onResetForm();
-    
+
     let data;
 
     if (order?.orderId) {
-      data = await putOrder(order?.orderId, verificarForm.values, cart, setLoading)
+      data = await putOrder(
+        order?.orderId,
+        verificarForm.values,
+        cart,
+        metodoPago,
+        setLoading
+      );
     } else {
-      data = await postOrder(verificarForm.values, user.userId, cart, setLoading);
+      data = await postOrder(
+        verificarForm.values,
+        user.userId,
+        cart,
+        metodoPago,
+        setLoading
+      );
     }
 
     if (data.estado === "error") {
@@ -120,11 +134,11 @@ export const Checkout = () => {
       return;
     }
 
-    setOrder({})
-    setCart([])
-    toast.success(data.mensaje)
-    setLink(data.link)
-    setOpen(true)
+    setOrder({});
+    setCart([]);
+    toast.success(data.mensaje);
+    setLink(data.link);
+    setOpen(true);
   };
 
   return (
@@ -272,7 +286,45 @@ export const Checkout = () => {
                     name="codigoPostal"
                     id="codigoPostal"
                   />
-                  <p className="checkout-error">{err ? err.codigoPostal : ""}</p>
+                  <p className="checkout-error">
+                    {err ? err.codigoPostal : ""}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="checkout-section">
+              <em className="checkout-text">Método de Pago</em>
+              <div className="checkout-sectionCheck">
+                <div className="checkout-boxCheck">
+                  <span>Pagar con Mercado Pago</span>
+                  <MercadoPago />
+                  <label className="checkout-labelCheck">
+                    <input
+                      className="checkout-inputCheck"
+                      type="radio"
+                      name="metodo_pago"
+                      value="mercado_pago"
+                      checked={metodoPago === "mercado_pago"}
+                      onChange={(e) => setMetodoPago(e.target.value)}
+                    />
+                    <div className="checkout-transition"></div>
+                  </label>
+                </div>
+                <div className="checkout-boxCheck">
+                  <span>Pagar con Pay Pal</span>
+                  <PayPal />
+                  <label className="checkout-labelCheck">
+                    <input
+                      className="checkout-inputCheck"
+                      type="radio"
+                      name="metodo_pago"
+                      value="pay_pal"
+                      checked={metodoPago === "pay_pal"}
+                      onChange={(e) => setMetodoPago(e.target.value)}
+                    />
+                    <div className="checkout-transition"></div>
+                  </label>
                 </div>
               </div>
             </div>
@@ -292,14 +344,23 @@ export const Checkout = () => {
             <em className="checkout-totalTitle">Resumen de mi compra:</em>
             {cart.map((product) => (
               <div className="checkout-totalBox" key={product.productoId}>
-                <img className="checkout-totalImg" src={product.foto} alt={product.nombre} />
+                <img
+                  className="checkout-totalImg"
+                  src={product.foto}
+                  alt={product.nombre}
+                />
                 <p className="checkout-totalText">
-                  {`${product.nombre} - x ${product.cantidad} un - $${product.precio}.- c/u`}
+                  {`${product.nombre} - x ${product.cantidad} un - ${
+                    metodoPago === "pay_pal"
+                      ? `U$S ${product.precio}`
+                      : `AR$ ${product.precioEnPesos}`
+                  }.- c/u`}
                 </p>
               </div>
             ))}
             <p className="checkout-totalPrice">
-              TOTAL: ${totalCart().toLocaleString("es-AR")}
+              TOTAL: {metodoPago === "mercado_pago" ? "AR$ " : "U$S "}
+              {totalCart(metodoPago === "mercado_pago" ? "ARS" : "USD").toLocaleString("es-AR")}
             </p>
             <div className="checkout-totalBtns">
               <Link className="checkout-totalBtn" to="/productos">
@@ -317,7 +378,8 @@ export const Checkout = () => {
               El envío es gratuito para todo CABA para compras mayores de
               AR$20.000. Para mas info
               <Link className="checkout-infoDetail" to="/detalle-envio">
-                click aquí <BsFillQuestionCircleFill className="icon-question" />
+                click aquí{" "}
+                <BsFillQuestionCircleFill className="icon-question" />
               </Link>
             </em>
             <em className="checkout-infoText">
@@ -328,22 +390,23 @@ export const Checkout = () => {
           </div>
         </div>
       </section>
-      <ModalContainer 
-        open={open} 
+      <ModalContainer
+        open={open}
         onClose={() => {
-          setOpen(false)
-          navigate("/mis-ordenes")
-          toast.warning("Salio de la pantalla de pago. Retome el mismo en mis ordenes.")
+          setOpen(false);
+          navigate("/mis-ordenes");
+          toast.warning(
+            "Salio de la pantalla de pago. Retome el mismo en mis ordenes."
+          );
         }}
       >
-            <iframe 
-              ref={iframeRef}
-              src={link} 
-              className="checkout-link"
-              style={{ border: "none" }}
-            />
+        <iframe
+          ref={iframeRef}
+          src={link}
+          className="checkout-link"
+          style={{ border: "none" }}
+        />
       </ModalContainer>
     </>
   );
 };
-

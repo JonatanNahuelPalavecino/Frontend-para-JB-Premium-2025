@@ -67,7 +67,8 @@
   }
 
   &-img {
-    width: 100px;
+    width: 75px;
+    margin: .5rem
   }
 
   &-text {
@@ -112,7 +113,7 @@
 
   &-burger {
     position: absolute;
-    top: 30%;
+    top: 25%;
     right: 0;
     margin: .5rem;
     @media (min-width: 993px) {

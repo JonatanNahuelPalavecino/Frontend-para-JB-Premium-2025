@@ -39,6 +39,10 @@ export const obtenerDescripcion = (codigoDetalle) => {
       return "El código de seguridad de la tarjeta es inválido.";
     case "cc_rejected_other_reason":
       return "Otro motivo de rechazo no especificado.";
+    case "Acreditado":
+      return "Pago acreditado";
+    case "No Acreditado":
+      return "Pago No Acreditado";
     default:
       return "Motivo de rechazo no identificado.";
   }

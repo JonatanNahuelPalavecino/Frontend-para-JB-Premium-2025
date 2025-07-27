@@ -1,14 +1,12 @@
 import { useEffect, useState } from "react";
 import { getProductoByFilters } from "../utils/peticiones/getProductoByFilters";
 import { Filtros } from "../Filtros/Filtros";
-import { useCotDolar } from "../Hooks/useCotDolar";
 import { FlyerEnvio } from "../Flyer/FlyerEnvio";
 import { bodegas } from "../utils/datos/bodegas";
 import { Productos } from "../Productos/Productos";
 
 export const ProductosContainer = () => {
   const url = import.meta.env.VITE_SERVER;
-  const { dolarOficial } = useCotDolar(0);
   const [vinos, setVinos] = useState([]);
   const [accesorios, setAccesorios] = useState([]);
   const [error, setError] = useState(null);
@@ -41,6 +39,7 @@ export const ProductosContainer = () => {
     }
 
     obtenerAccesoriosPorFiltro()
+    document.title = "Productos - JB Premium - Vinos Españoles - Distribuidor Oficial"
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -77,8 +76,8 @@ export const ProductosContainer = () => {
       <hr />
       <Filtros setFilters={setFilters}  filtros={filtros}/>
       <div className="productos-container">
-        <Productos isLoading={isLoading} error={error} productos={vinos} dolarOficial={dolarOficial} type={"vinos"}/>
-        <Productos isLoading={isLoading} error={error} productos={accesorios} dolarOficial={dolarOficial} type={"accesorios"}/>
+        <Productos isLoading={isLoading} error={error} productos={vinos} type={"vinos"}/>
+        <Productos isLoading={isLoading} error={error} productos={accesorios} type={"accesorios"}/>
       </div>
       <FlyerEnvio bodegas={bodegas} />
     </main>

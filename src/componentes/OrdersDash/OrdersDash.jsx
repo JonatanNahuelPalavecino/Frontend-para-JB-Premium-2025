@@ -35,24 +35,31 @@ export const OrdersDash = () => {
     provincia,
     codigoPostal,
     email,
-    userId
+    userId,
   } = state;
 
-  const fetchOrders = async (filters) => {
+  const fetchOrders = async (
+    filters = {},
+    setOrders,
+    setUniqueState = undefined
+  ) => {
     setIsLoading(true);
     try {
       const res = await getOrdersById(filters);
       setOrders(res);
-      if (Object.keys(filters).length === 0) {
-        setAllOrders(res);
 
-        const unique = Array.from(
-          new Map(
-            res?.map((order) => [order.userId, order.user])
-          ).entries()
-        ).map(([userId, user]) => ({ userId, ...user }));
+      if (setUniqueState) {
+        const usersMap = new Map();
 
-        setUniqueUsers(unique);
+        res?.forEach((tx) => {
+          const { userId } = tx.user;
+          if (!usersMap.has(userId)) {
+            usersMap.set(userId, tx.user);
+          }
+        });
+
+        const unique = Array.from(usersMap.values());
+        setUniqueState(unique);
       }
     } catch (error) {
       console.log(error);
@@ -63,25 +70,24 @@ export const OrdersDash = () => {
   };
 
   useEffect(() => {
-    fetchOrders(filters);
+    document.title =
+      "Gestión de Ordenes de Compra - JB Premium - Vinos Españoles - Distribuidor Oficial";
+    fetchOrders(filters, setOrders, setUniqueUsers);
+    fetchOrders(filters, setAllOrders);
   }, [filters]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const newFilters = {};
-    for (const key in state) {
-      const value = state[key].trim();
-      if (key === "userId" && value) {
-        newFilters[key] = parseInt(value)
-      } else if (value !== "") {
-        newFilters[key] = {
-          contains: value,
-          mode: "insensitive", // hace que no distinga entre mayúsculas y minúsculas
-        };
-      }
+    if (state.userId) {
+      state["o.userId"] = parseInt(state.userId);
+      delete state.userId;
+    } else if (state.telefono) {
+      state["o.telefono"] = state.telefono;
+      delete state.telefono;
     }
-    setFilters(newFilters);
+
+    setFilters(state);
   };
 
   const deleteFilters = () => {
@@ -103,7 +109,8 @@ export const OrdersDash = () => {
             Total de Ordenes Abonadas
           </span>
           <span className="ordersDash-boxNumero">
-            {allOrders?.filter((order) => order?.estado === "approved").length || 0}
+            {allOrders?.filter((order) => order?.estado === "approved")
+              .length || 0}
           </span>
         </div>
         <div className="ordersDash-box">
@@ -111,12 +118,10 @@ export const OrdersDash = () => {
             Total de Ordenes Pendientes de Pago
           </span>
           <span className="ordersDash-boxNumero">
-            {
-              allOrders?.filter(
-                (order) =>
-                  order?.estado === "pending" || order?.estado === "in_process"
-              ).length || 0
-            }
+            {allOrders?.filter(
+              (order) =>
+                order?.estado === "pending" || order?.estado === "in_process"
+            ).length || 0}
           </span>
         </div>
         <div className="ordersDash-box ordersDash-boxOtherColor">
@@ -124,13 +129,13 @@ export const OrdersDash = () => {
             Total de Ordenes Rechazadas
           </span>
           <span className="ordersDash-boxNumero">
-            {allOrders?.filter((order) => order?.estado === "rejected").length || 0}
+            {allOrders?.filter((order) => order?.estado === "rejected")
+              .length || 0}
           </span>
         </div>
       </div>
       <form className="ordersDash-form" onSubmit={handleSubmit}>
         <div className="ordersDash-formContainer">
-
           <div className="ordersDash-formBox">
             <label className="ordersDash-label" htmlFor="orderId">
               N° de Orden
@@ -146,28 +151,52 @@ export const OrdersDash = () => {
           </div>
           <div className="ordersDash-formBox">
             <label className="ordersDash-label" htmlFor="estado">
-              Estado de la orden
+              Estado de la Orden
             </label>
-            <input
-              className="ordersDash-input"
-              type="text"
+            <select
               name="estado"
               id="estado"
+              className="ordersDash-input"
               value={estado}
               onChange={onInputChange}
-            />
+            >
+              <option className="ordersDash-label" value="">
+                Elige una opción
+              </option>
+              <option className="ordersDash-label" value={"approved"}>
+                Ordenes Aprobadas
+              </option>
+              <option className="ordersDash-label" value={"rejected"}>
+                Ordenes Rechazadas
+              </option>
+              <option className="ordersDash-label" value={"in_process"}>
+                Ordenes Pendientes
+              </option>
+            </select>
           </div>
           <div className="ordersDash-formBox">
             <label className="ordersDash-label" htmlFor="userId">
               Usuario
             </label>
-            <select name="userId" id="userId" className="ordersDash-input" value={userId} onChange={onInputChange}>
-              <option className="ordersDash-label" value="">Elige una opción</option>
-              {
-                uniqueUsers.map((user) => (
-                  <option className="ordersDash-label" key={user?.userId} value={user?.userId}>{user?.nombre} {user?.apellido}</option>
-                ))
-              }
+            <select
+              name="userId"
+              id="userId"
+              className="ordersDash-input"
+              value={userId}
+              onChange={onInputChange}
+            >
+              <option className="ordersDash-label" value="">
+                Elige una opción
+              </option>
+              {uniqueUsers.map((user) => (
+                <option
+                  className="ordersDash-label"
+                  key={user?.userId}
+                  value={user?.userId}
+                >
+                  {user?.nombre} {user?.apellido}
+                </option>
+              ))}
             </select>
           </div>
           <div className="ordersDash-formBox">

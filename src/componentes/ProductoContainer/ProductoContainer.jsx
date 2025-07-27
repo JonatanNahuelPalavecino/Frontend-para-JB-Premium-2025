@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import useFetch from "../Hooks/useFetch";
 import { Producto } from "../Producto/Producto";
-import { useCotDolar } from "../Hooks/useCotDolar";
 import { SkeletonComponent } from "../SkeletonComponent/SkeletonComponent";
 import { ProductoDetail } from "../ProductoDetail/ProductoDetail";
 import {AccesoriosContainer} from "../AccesoriosContainer/AccesoriosContainer"
@@ -11,7 +10,6 @@ export const ProductoContainer = () => {
   const { productoId } = useParams();
   const { data, error, loading, fetchData } = useFetch();
   const url = import.meta.env.VITE_SERVER;
-  const { dolarOficial } = useCotDolar(0);
 
   useEffect(() => {
     fetchData(`${url}/products/${productoId}`);
@@ -37,7 +35,7 @@ export const ProductoContainer = () => {
         </div>
       ) : (
         <>
-          <Producto producto={data.product} dolarOficial={dolarOficial} />
+          <Producto producto={data.product} />
           {
             (nombre !== "Caja Individual" && nombre !== "Caja Doble") && (
               <>

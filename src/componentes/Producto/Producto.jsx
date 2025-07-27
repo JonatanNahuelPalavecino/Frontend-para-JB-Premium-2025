@@ -7,22 +7,11 @@ import { BsFillQuestionCircleFill } from "react-icons/bs";
 import { toast } from "sonner";
 import { ModalContainer } from "../ModalContainer/ModalContainer";
 
-export const Producto = ({ producto, dolarOficial }) => {
-  const precioFinal = Math.round(
-    producto?.precio > 0 ? producto?.precio * dolarOficial : 0
-  );
-  const precioConDescuento = Math.round(
-    producto?.precio > 0
-      ? producto?.precio - producto?.precio * (producto?.porcDesc / 100)
-      : 0
-  );
-  const precioFinalConDescuento = Math.round(
-    precioFinal > 0 ? precioFinal - precioFinal * (producto?.porcDesc / 100) : 0
-  );
+export const Producto = ({ producto }) => {
 
   const [cantidad, setCantidad] = useState(0);
   const [open, setOpen] = useState(false);
-  const { isInCart, addToCart } = useContext(Context);
+  const { isInCart, addToCart, calcularDescuento } = useContext(Context);
 
   useEffect(() => {
     document.title = `${producto?.nombre} - JB Premium - Vinos Españoles - Distribuidor Oficial`;
@@ -63,20 +52,20 @@ export const Producto = ({ producto, dolarOficial }) => {
             producto?.nombre === "Caja Doble")  && (
             <p className="producto-desc producto-width">{producto?.descUno}</p>
           )}
-          {producto?.precio !== 0 ? (
+          {producto?.precio !== 0 || producto?.precioEnPesos !== 0 ? (
             <>
               {producto?.porcDesc > 0 ? (
                 <>
                   <p className="producto-price producto-price-tachado">
-                    {`U$S ${producto?.precio} BNA / AR$ ${precioFinal} c/u`}
+                    {`U$S ${producto?.precio} BNA / AR$ ${producto?.precioEnPesos} c/u`}
                   </p>
                   <p className="producto-price">
-                    {`U$S ${precioConDescuento} BNA / AR$ ${precioFinalConDescuento} c/u`}
+                    {`U$S ${calcularDescuento(producto?.precio, producto?.porcDesc)} BNA / AR$ ${calcularDescuento(producto?.precioEnPesos, producto?.porcDesc)} c/u`}
                   </p>
                 </>
               ) : (
                 <p className="producto-price">
-                  {`U$S ${producto?.precio} BNA / AR$ ${precioFinal} c/u`}
+                  {`U$S ${producto?.precio} BNA / AR$ ${producto?.precioEnPesos} c/u`}
                 </p>
               )}
             </>
@@ -119,7 +108,7 @@ export const Producto = ({ producto, dolarOficial }) => {
                     <button
                       className="producto-btn"
                       onClick={() =>
-                        addToCart(producto, cantidad, precioFinal, toast)
+                        addToCart(producto, cantidad, toast)
                       }
                     >
                       AGREGAR AL CARRITO

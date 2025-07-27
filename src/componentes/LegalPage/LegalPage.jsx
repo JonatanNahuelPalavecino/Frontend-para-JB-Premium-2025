@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './LegalPage.scss';
 
 export const LegalPage = () => {
+
+  useEffect(() => {
+    document.title = "Términos y Políticas - JB Premium - Vinos Españoles - Distribuidor Oficial";
+  }, [])
   return (
     <div className="legalPage">
       <p className="legalPage-title">Términos y Políticas de JB Premium</p>

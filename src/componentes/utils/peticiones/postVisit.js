@@ -11,11 +11,12 @@ export const postVisit = async (url, location, user) => {
         filters: {
           ruta: location,
           user_agent: navigator.userAgent,
-          referer: document.referrer,
+          referer: document.referrer || null,
           userId: user?.userId || null,
           ip: ip,
         },
       }),
+      credentials: "include",
     });
     const data = await result.json();
     localStorage.setItem("visita", JSON.stringify(data));
@@ -47,8 +48,8 @@ export const countVisit = async (desde, hasta) => {
         body: JSON.stringify({
           filters: {
             fecha: {
-              gte: desdeDia,
-              lte: hastaDia,
+              desde: desdeDia,
+              hasta: hastaDia,
             },
           },
         }),
@@ -82,10 +83,14 @@ export const getVisitsWithProducts = async () => {
   const url = import.meta.env.VITE_SERVER;
   try {
     const response = await fetch(`${url}/visit/get-all-visits`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       credentials: "include",
     });
 
     const data = await response.json();
+
+    console.log(data);
 
     const visitasFiltradas = data?.visits?.filter(
       (visit) => visit?.productoNombre !== null
@@ -120,6 +125,8 @@ export const getAllVisits = async () => {
 
   try {
     const response = await fetch(`${url}/visit/get-all-visits`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       credentials: "include",
     });
 

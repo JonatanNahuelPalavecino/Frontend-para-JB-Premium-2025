@@ -16,11 +16,12 @@ export const Auth = ({ type }) => {
     apellido: "",
     email: "",
     password: "",
-    edad: ""
+    edad: "",
+    telefono: ""
   };
   const { state, onInputChange, onResetForm } = useForm(initialState);
 
-  const { nombre, apellido, email, password, edad } = state;
+  const { nombre, apellido, email, password, edad, telefono } = state;
   const { user, setUser, setLoading } = useContext(Context);
   const [err, setErr] = useState();
   const [see, setSee] = useState(false);
@@ -121,6 +122,20 @@ export const Auth = ({ type }) => {
                 onChange={onInputChange}
               />
               <p className="auth-error">{err ? err.edad : ""}</p>
+            </div>
+            <div className="auth-box">
+              <label className="auth-label" htmlFor="telefono">
+                Telefono
+              </label>
+              <input
+                className="auth-input"
+                type="text"
+                value={telefono}
+                name="telefono"
+                id="telefono"
+                onChange={onInputChange}
+              />
+              <p className="auth-error">{err ? err.telefono : ""}</p>
             </div>
           </>
         )}

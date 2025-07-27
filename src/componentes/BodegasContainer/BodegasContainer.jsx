@@ -11,7 +11,7 @@ export const BodegasContainer = ({
   error,
 }) => {
   const productoDestacado = productos.find(
-    (producto) => producto.destacado === true
+    (producto) => producto.destacado == true
   );
 
   return (

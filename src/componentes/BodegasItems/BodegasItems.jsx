@@ -3,12 +3,9 @@ import "@splidejs/react-splide/css";
 import "@splidejs/react-splide/css/skyblue";
 import { Item } from "../Item/Item";
 import "./BodegasItems.scss"
-import { useCotDolar } from "../Hooks/useCotDolar";
 import {SkeletonComponent} from "../SkeletonComponent/SkeletonComponent";
 
 export const BodegasItems = ({productos, bodega, loading}) => {
-
-  const { dolarOficial } = useCotDolar(0);
 
   productos = productos.filter(producto => producto.activo)
 
@@ -45,7 +42,7 @@ export const BodegasItems = ({productos, bodega, loading}) => {
         (
             productos.map((producto) => (
                 <SplideSlide className="bodegasItems" key={producto.productoId}>
-                    <Item {...producto} dolarOficial={dolarOficial}/>
+                    <Item {...producto}/>
                 </SplideSlide>
             ))
         )
