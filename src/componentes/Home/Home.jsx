@@ -33,7 +33,7 @@ export const Home = () => {
 
   const productosPromo =
     data?.products?.filter(
-      (producto) => producto.promocion === true && producto.fotoPromo
+      (producto) => producto.promocion == true && producto.fotoPromo
     ) || [];
 
   return (
@@ -54,17 +54,21 @@ export const Home = () => {
           className="sliderPromo"
         >
           {productosPromo.map((producto) => (
-            <SplideSlide
-              className="sliderPromo-item"
-              key={producto.productoId}
-            >
+            <SplideSlide className="sliderPromo-item" key={producto.productoId}>
               <div className="sliderPromo-content">
                 <img
                   src={producto.fotoPromo}
                   alt={producto.nombre}
                   className="sliderPromo-img"
                 />
-                <Link className="sliderPromo-btn" to={`/detalle/${producto.productoId}`}>Quiero ver</Link>
+                {producto.stock_disponible && (
+                  <Link
+                    className="sliderPromo-btn"
+                    to={`/detalle/${producto.productoId}`}
+                  >
+                    Quiero ver
+                  </Link>
+                )}
               </div>
             </SplideSlide>
           ))}
