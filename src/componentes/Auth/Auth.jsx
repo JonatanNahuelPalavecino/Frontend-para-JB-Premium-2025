@@ -4,10 +4,12 @@ import { Context } from "../Context/Context";
 import { Link, useNavigate } from "react-router-dom";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import "./Auth.scss"
+import "./Auth.scss";
 import { verifyForm } from "../utils/validation/verifyForm";
 import { postAuth } from "../utils/peticiones/postAuth";
 import { toast } from "sonner";
+import { ModalContainer } from "../ModalContainer/ModalContainer";
+import { activateUser } from "../utils/peticiones/activateUser";
 
 export const Auth = ({ type }) => {
   const initialState = {
@@ -17,10 +19,11 @@ export const Auth = ({ type }) => {
     email: "",
     password: "",
     edad: "",
-    telefono: ""
+    telefono: "",
   };
   const { state, onInputChange, onResetForm } = useForm(initialState);
-
+  const [open, setOpen] = useState(false);
+  const [mail, setMail] = useState("");
   const { nombre, apellido, email, password, edad, telefono } = state;
   const { user, setUser, setLoading } = useContext(Context);
   const [err, setErr] = useState();
@@ -44,40 +47,62 @@ export const Auth = ({ type }) => {
   }, [type]);
 
   const handleSubmit = async (e) => {
+    e.preventDefault();
 
-    e.preventDefault()
-
-    const verificarForm = verifyForm(state, type)
+    const verificarForm = verifyForm(state, type);
 
     if (verificarForm.estado === "error") {
-      setErr(verificarForm.error)
-      return
+      setErr(verificarForm.error);
+      return;
     }
 
-    setErr()
-    onResetForm()
+    setErr();
+    onResetForm();
 
-    const data = await postAuth(verificarForm.values, type, setLoading)
+    const data = await postAuth(verificarForm.values, type, setLoading);
 
     if (data.estado === "error") {
-      toast.error(data.mensaje)
-      return
+      toast.error(data.mensaje);
+      console.log(data);
+      if (!data.mensaje === "El usuario está desactivado.") {
+        setMail(data.email);
+        setOpen(true);
+      }
+      return;
     } else if (data.message === "Failed to fetch") {
       toast.warning("Hubo un error con el servidor. Intente más tarde.");
       return;
     }
 
-    setUser(data.user[0])
-    toast.success(data.mensaje)
+    setUser(data.user[0]);
+    toast.success(data.mensaje);
     setTimeout(() => {
-      navigate("/")
+      navigate("/");
     }, 500);
+  };
 
-  }
+  const handleActivateUser = async () => {
+    const data = await activateUser(mail, setLoading);
+
+    if (data.estado === "error") {
+      toast.error(data.mensaje);
+      return;
+    } else if (data.message === "Failed to fetch") {
+      toast.warning("Hubo un error con el servidor. Intente más tarde.");
+      return;
+    }
+
+    toast.success(data.mensaje);
+    setTimeout(() => {
+      navigate("/");
+    }, 500);
+  };
 
   return (
     <section className="auth">
-      <p className="auth-title">{type === "auth" ? "Iniciar Sesión" : "Registrate"}</p>
+      <p className="auth-title">
+        {type === "auth" ? "Iniciar Sesión" : "Registrate"}
+      </p>
       <form className="auth-form" onSubmit={handleSubmit}>
         {type === "register" && (
           <>
@@ -183,7 +208,10 @@ export const Auth = ({ type }) => {
               <button className="auth-btn" type="submit">
                 Inicia Sesión
               </button>
-              <Link className="auth-btn auth-btnOtherColor" to="/registro-usuario">
+              <Link
+                className="auth-btn auth-btnOtherColor"
+                to="/registro-usuario"
+              >
                 Registrate
               </Link>
             </>
@@ -198,18 +226,38 @@ export const Auth = ({ type }) => {
             </>
           )}
         </div>
-        {
-          type === "auth"
-          ?
-          (
-            <Link className="auth-recover" to="/restablecer-password">¿Olvidaste tu contraseña? Restablecela haciendo click aca</Link>
-          )
-          :
-          (
-            <Link className="auth-recover" to="/terminos-condiciones">Al registrarte en nuestra web, estás aceptando nuestros térmicos y condiciones. Para verlas, click aca.</Link>
-          )
-        }
+        {type === "auth" ? (
+          <Link className="auth-recover" to="/restablecer-password">
+            ¿Olvidaste tu contraseña? Restablecela haciendo click aca
+          </Link>
+        ) : (
+          <Link className="auth-recover" to="/terminos-condiciones">
+            Al registrarte en nuestra web, estás aceptando nuestros térmicos y
+            condiciones. Para verlas, click aca.
+          </Link>
+        )}
       </form>
+      <ModalContainer open={open} onClose={() => setOpen(false)}>
+        <div className="auth-modal">
+          <p className="auth-modalText">
+            Tu cuenta {mail} está desactivada.
+          </p>
+          <p className="auth-modalText">
+            Si queres volver a operar con nosotros, tendrás que activarla.
+          </p>
+          <div className="auth-modalBtns">
+            <button onClick={() => setOpen(false)} className="auth-btn">
+              Cancelar
+            </button>
+            <button
+              onClick={handleActivateUser}
+              className="auth-btn auth-btnOtherColor"
+            >
+              Activar
+            </button>
+          </div>
+        </div>
+      </ModalContainer>
     </section>
   );
 };

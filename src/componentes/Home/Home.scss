@@ -33,6 +33,8 @@
 
   &-btn {
     position: absolute;
+    font-family: "Roboto", sans-serif;
+    font-size: 1rem;
     font-weight: 700;
     background-color: rgb(212, 175, 55);
     color: rgb(255, 255, 255);
@@ -43,7 +45,6 @@
     text-decoration: none;
     z-index: 0;
     cursor: pointer;
-    font-family: "Roboto", sans-serif;
     left: 50px;
     bottom: 50px;
   }

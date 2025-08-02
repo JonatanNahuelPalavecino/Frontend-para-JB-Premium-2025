@@ -91,6 +91,8 @@
   &-btns {
     width: 100%;
     display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
     justify-content: center;
     align-items: center;
     margin: 1rem 0;
@@ -104,6 +106,7 @@
 
   &-btn {
     font-family: "Roboto", sans-serif;
+    font-size: 1rem;
     font-weight: 700;
     background-color: rgb(212, 175, 55);
     color: rgb(255, 255, 255);
@@ -119,5 +122,31 @@
     &OtherColor {
       background-color: #b19129;
     }
+
+    &Danger {
+      background-color: #a60000;
+    }
   }
+
+  &-modal {
+    padding: 1rem;
+
+    &Text {
+      font-family: "Roboto", sans-serif;
+      font-weight: bold;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin: 1rem 0 2rem;
+    }
+
+    &Btns {
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+      gap: 1rem;
+      margin: 0.5rem 0;
+    }
+  }
+
 }

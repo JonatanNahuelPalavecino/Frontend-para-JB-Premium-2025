@@ -7,17 +7,20 @@ import { putUser } from "../utils/peticiones/putUser";
 import { verifyForm } from "../utils/validation/verifyForm";
 import { toast } from "sonner";
 import { postLogOut } from "../utils/peticiones/postLogOut";
+import { ModalContainer } from "../ModalContainer/ModalContainer";
+import { desactivateUser } from "../utils/peticiones/desactivateUser";
 
 export const Profile = () => {
   const navigate = useNavigate();
   const { user, setLoading } = useContext(Context);
+  const [open, setOpen] = useState(false);
   const [change, setChange] = useState(true);
   const [err, setErr] = useState();
   const initialState = {
     nombre: user?.nombre || "",
     apellido: user?.apellido || "",
     edad: user?.edad || "",
-    telefono: user?.telefono || ""
+    telefono: user?.telefono || "",
   };
 
   const { state, onInputChange, onResetForm } = useForm(initialState);
@@ -27,14 +30,15 @@ export const Profile = () => {
     if (!user?.userId) {
       return navigate("/");
     }
-    document.title = "Mi Perfil - JB Premium - Vinos Españoles - Distribuidor Oficial"
+    document.title =
+      "Mi Perfil - JB Premium - Vinos Españoles - Distribuidor Oficial";
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     const verificarForm = verifyForm(state, "modify-user");
 
     if (verificarForm.estado === "error") {
@@ -45,23 +49,41 @@ export const Profile = () => {
     setErr();
     onResetForm();
 
-    console.log(verificarForm)
+    // console.log(verificarForm);
 
     const data = await putUser(user?.userId, setLoading, verificarForm.values);
 
     if (data.estado === "error") {
-      toast.error(data.mensaje)
-      return
+      toast.error(data.mensaje);
+      return;
     } else if (data.message === "Failed to fetch") {
       toast.warning("Hubo un error con el servidor. Intente más tarde.");
       return;
     }
 
-    toast.success(`${data.mensaje} Inicia sesión nuevamente.`)
-    postLogOut(toast, setLoading)
+    toast.success(`${data.mensaje} Inicia sesión nuevamente.`);
+    postLogOut(toast, setLoading);
     setTimeout(() => {
-      navigate("/inicio-sesion")
-    }, 500)
+      navigate("/inicio-sesion");
+    }, 500);
+  };
+
+  const handleDesactivateUser = async () => {
+    const data = await desactivateUser(user?.email, setLoading);
+
+    if (data.estado === "error") {
+      toast.error(data.mensaje);
+      return;
+    } else if (data.message === "Failed to fetch") {
+      toast.warning("Hubo un error con el servidor. Intente más tarde.");
+      return;
+    }
+
+    toast.success(data.mensaje);
+    postLogOut(toast, setLoading);
+    setTimeout(() => {
+      navigate("/");
+    }, 500);
   };
 
   return (
@@ -172,6 +194,12 @@ export const Profile = () => {
               >
                 Editar
               </button>
+              <button
+                className="profile-btn profile-btnDanger"
+                onClick={() => setOpen(true)}
+              >
+                Desactivar Cuenta
+              </button>
               <Link className="profile-btn profile-btnOtherColor" to="/">
                 volver al inicio
               </Link>
@@ -179,6 +207,24 @@ export const Profile = () => {
           )}
         </div>
       </div>
+      <ModalContainer open={open} onClose={() => setOpen(false)}>
+        <div className="profile-modal">
+          <p className="profile-modalText">
+            ¿Estás seguro que querés eliminar tu cuenta?
+          </p>
+          <div className="profile-modalBtns">
+            <button onClick={() => setOpen(false)} className="profile-btn">
+              Cancelar
+            </button>
+            <button
+              onClick={handleDesactivateUser}
+              className="profile-btn profile-btnDanger"
+            >
+              Eliminar
+            </button>
+          </div>
+        </div>
+      </ModalContainer>
     </section>
   );
 };

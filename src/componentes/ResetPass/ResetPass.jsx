@@ -7,6 +7,7 @@ import { Context } from "../Context/Context";
 import { toast } from "sonner";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import { useNavigate } from "react-router-dom";
 
 export const ResetPass = ({ type }) => {
   const initialState = {
@@ -19,6 +20,7 @@ export const ResetPass = ({ type }) => {
   const [err, setErr] = useState();
   const [see, setSee] = useState(false);
   const { setLoading } = useContext(Context);
+  const navigate = useNavigate()
 
   const token =
     type === "cambiar-password"
@@ -61,7 +63,10 @@ export const ResetPass = ({ type }) => {
       return;
     }
 
-    toast.success(data.mensaje);
+    setTimeout(() => {
+      navigate("/")
+      toast.success(data.mensaje);
+    }, 500)
   };
   return (
     <section className="resetPass">

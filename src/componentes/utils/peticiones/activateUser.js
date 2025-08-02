@@ -5,6 +5,7 @@ export const activateUser = async (email, setLoading) => {
         const response = await fetch(`${url}/user/activate-user`, {
             method: "PATCH",
             headers: {"Content-Type": "application/json"},
+            credentials: "include",
             body: JSON.stringify({email})
         })
         const data = await response.json()
