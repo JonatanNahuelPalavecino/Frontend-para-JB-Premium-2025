@@ -187,7 +187,7 @@ export const Sidebar = ({ open, setOpen, navItems }) => {
         <div className="sidebar-box">
           <img
             className="sidebar-img"
-            src="https://res.cloudinary.com/dabgfr6qn/image/upload/v1742325732/uploads/logo.png"
+            src="https://res.cloudinary.com/dcyhxj1nn/image/upload/v1754487345/logo_ibirsr.png"
             alt="logo"
           />
           <p className="sidebar-text">VINOS ESPAÑOLES</p>

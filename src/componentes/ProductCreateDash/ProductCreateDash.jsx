@@ -9,9 +9,9 @@ export const ProductCreateDash = () => {
   const navigate = useNavigate();
   const { setLoading } = useContext(Context);
 
-  const [previewFoto, setPreviewFoto] = useState("https://res.cloudinary.com/dabgfr6qn/image/upload/v1753556664/no-image-available-icon-vector_qdmgee.jpg");
-  const [previewPdf, setPreviewPdf] = useState("https://res.cloudinary.com/dabgfr6qn/image/upload/v1753556664/no-image-available-icon-vector_qdmgee.jpg");
-  const [previewFotoPromo, setPreviewFotoPromo] = useState("https://res.cloudinary.com/dabgfr6qn/image/upload/v1753556664/no-image-available-icon-vector_qdmgee.jpg");
+  const [previewFoto, setPreviewFoto] = useState("https://res.cloudinary.com/dcyhxj1nn/image/upload/v1754487344/no-image-available-icon-vector_qdmgee_i89zvq.jpg");
+  const [previewPdf, setPreviewPdf] = useState("https://res.cloudinary.com/dcyhxj1nn/image/upload/v1754487344/no-image-available-icon-vector_qdmgee_i89zvq.jpg");
+  const [previewFotoPromo, setPreviewFotoPromo] = useState("https://res.cloudinary.com/dcyhxj1nn/image/upload/v1754487344/no-image-available-icon-vector_qdmgee_i89zvq.jpg");
 
   const initialState = {
     nombre: "",

@@ -11,7 +11,7 @@ export const NotFound = () => {
 
     return (
         <main className='notFound'>
-                <img className='notFound-img' alt="notFound" src="https://res.cloudinary.com/dabgfr6qn/image/upload/v1744660541/flyer/veuuf3liof5csylzfrqt.jpg"/>
+                <img className='notFound-img' alt="notFound" src="https://res.cloudinary.com/dcyhxj1nn/image/upload/v1754487351/veuuf3liof5csylzfrqt_dwa8kk.jpg"/>
                 <div className='notFound-container'>
                     <strong className='notFound-title'>404 NOT FOUND - PAGINA NO ENCONTRADA</strong>
                     <em className='notFound-desc'>Estas en una ruta inexistente. Clickea el boton VOLVER para ir al Inicio</em>

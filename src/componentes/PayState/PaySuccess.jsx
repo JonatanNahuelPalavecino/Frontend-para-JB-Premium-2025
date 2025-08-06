@@ -10,7 +10,7 @@ export const PaySuccess = () => {
 
     return (
         <main className="pay">
-                <img className='pay-img' alt="pago-realizado" src='https://res.cloudinary.com/dabgfr6qn/image/upload/v1744660436/flyer/eolmlkpz0rg8wa0bkjst.jpg'/>
+                <img className='pay-img' alt="pago-realizado" src='https://res.cloudinary.com/dcyhxj1nn/image/upload/v1754487350/eolmlkpz0rg8wa0bkjst_hnpbfz.jpg'/>
                 <div className="pay-container pay-success">
                     <p className="pay-title">COMPRA FINALIZADA</p>
                     <div className="pay-box">

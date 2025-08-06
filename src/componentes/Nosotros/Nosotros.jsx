@@ -38,7 +38,7 @@ export const Nosotros = () => {
             <div className="nosotros-contentImg">
               <img
                 className="nosotros-img"
-                src="https://res.cloudinary.com/dabgfr6qn/image/upload/v1743966262/flyer/yotpmlmkocv2ywypozeu.jpg"
+                src="https://res.cloudinary.com/dcyhxj1nn/image/upload/v1754487351/yotpmlmkocv2ywypozeu_nmwjwg.jpg"
                 alt="nosotros1"
               />
             </div>
@@ -47,7 +47,7 @@ export const Nosotros = () => {
             <div className="nosotros-contentImg">
               <img
                 className="nosotros-imgWidth"
-                src="https://res.cloudinary.com/dabgfr6qn/image/upload/v1743966263/flyer/o8q3lazojzyolcoc1qwm.jpg"
+                src="https://res.cloudinary.com/dcyhxj1nn/image/upload/v1754487352/o8q3lazojzyolcoc1qwm_mh79qr.jpg"
                 alt="nosotros2"
               />
             </div>
@@ -78,7 +78,7 @@ export const Nosotros = () => {
                 playsInline
               >
                 <source
-                  src="https://res.cloudinary.com/dabgfr6qn/video/upload/v1743192246/videos/s5cukytuszg3bpbexfc0.mp4"
+                  src="https://res.cloudinary.com/dcyhxj1nn/video/upload/v1754487357/s5cukytuszg3bpbexfc0_hpyf7q.mp4"
                   type="video/mp4"
                 />
                 Tu navegador no soporta el elemento de video.

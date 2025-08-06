@@ -9,7 +9,7 @@ export const PayPending = () => {
 
     return (
         <main className="pay">
-                <img className='pay-img' alt="pago-pendiente" src='https://res.cloudinary.com/dabgfr6qn/image/upload/v1744660589/flyer/zm0vsoqvpxltrnmvbyun.jpg'/>
+                <img className='pay-img' alt="pago-pendiente" src='https://res.cloudinary.com/dcyhxj1nn/image/upload/v1754487353/zm0vsoqvpxltrnmvbyun_csn5lp.jpg'/>
                 <div className="pay-container pay-pending">
                     <p className="pay-title">COMPRA FINALIZADA</p>
                     <div className="pay-box">

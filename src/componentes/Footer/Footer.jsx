@@ -115,7 +115,7 @@ export const Footer = () => {
           <div className="footer-boxImg">
             <img
               className="footer-img"
-              src="https://res.cloudinary.com/dabgfr6qn/image/upload/v1742325732/uploads/logo.png"
+              src="https://res.cloudinary.com/dcyhxj1nn/image/upload/v1754487345/logo_ibirsr.png"
               alt="logo"
             />
           </div>

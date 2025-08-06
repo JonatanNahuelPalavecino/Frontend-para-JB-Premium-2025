@@ -16,7 +16,7 @@ export const DetailVenta = () => {
                 <hr/>
                 <div className="detail-venta-container">
                     <div className="detail-venta-box">
-                        <img className="detail-venta-img" src="https://res.cloudinary.com/dabgfr6qn/image/upload/v1745278173/flyer/obhxh0lkhvyj366sqtt9.jpg" alt="foto"/>
+                        <img className="detail-venta-img" src="https://res.cloudinary.com/dcyhxj1nn/image/upload/v1754487352/obhxh0lkhvyj366sqtt9_afdz5s.jpg" alt="foto"/>
                     </div>
                     <div className="detail-venta-box">
                         <p className='detail-ventaTitle'>COMPRA MINORISTA</p>

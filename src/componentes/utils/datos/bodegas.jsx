@@ -2,41 +2,41 @@ export const bodegas = [
     {
       id: 1,
       nombre: "Protos",
-      logo: "https://res.cloudinary.com/dabgfr6qn/image/upload/v1743027942/logos/protos.png",
+      logo: "https://res.cloudinary.com/dcyhxj1nn/image/upload/v1754487348/protos_ca7zfw.png",
       flyer:
-        "https://res.cloudinary.com/dabgfr6qn/image/upload/v1743083254/flyer/protos-flyer.jpg",
+        "https://res.cloudinary.com/dcyhxj1nn/image/upload/v1754487351/protos-flyer_px48b4.jpg",
         href: "https://www.bodegasprotos.com/es/"
     },
     {
       id: 2,
       nombre: "Herederos de Marqués de Riscal",
-      logo: "https://res.cloudinary.com/dabgfr6qn/image/upload/v1743027992/logos/marques-de-riscal.png",
+      logo: "https://res.cloudinary.com/dcyhxj1nn/image/upload/v1754487347/marques-de-riscal_xlypub.png",
       flyer:
-        "https://res.cloudinary.com/dabgfr6qn/image/upload/v1743083255/flyer/marques-flyer.jpg",
+        "https://res.cloudinary.com/dcyhxj1nn/image/upload/v1754487350/marques-flyer_x2ajqx.jpg",
         href: "https://www.marquesderiscal.com/"
     },
     {
       id: 3,
       nombre: "Martín Códax",
-      logo: "https://res.cloudinary.com/dabgfr6qn/image/upload/v1743028063/logos/martin-codax.png",
+      logo: "https://res.cloudinary.com/dcyhxj1nn/image/upload/v1754487348/martin-codax_fi2ckj.png",
       flyer:
-        "https://res.cloudinary.com/dabgfr6qn/image/upload/v1743083254/flyer/codax-flyer.jpg",
+        "https://res.cloudinary.com/dcyhxj1nn/image/upload/v1754487350/codax-flyer_hjijur.jpg",
         href: "https://www.martincodax.com/es/"
     },
     {
       id: 4,
       nombre: "Príncipe de Viana",
-      logo: "https://res.cloudinary.com/dabgfr6qn/image/upload/v1743028020/logos/principe-de-viana.png",
+      logo: "https://res.cloudinary.com/dcyhxj1nn/image/upload/v1754487348/principe-de-viana_b0jtns.png",
       flyer:
-        "https://res.cloudinary.com/dabgfr6qn/image/upload/v1743083254/flyer/principe-flyer.jpg",
+        "https://res.cloudinary.com/dcyhxj1nn/image/upload/v1754487351/principe-flyer_zv0zdz.jpg",
         href: "http://www.principedeviana.com/"
     },
     {
       id: 5,
       nombre: "Clunia",
-      logo: "https://res.cloudinary.com/dabgfr6qn/image/upload/v1743105136/logos/clunia.png",
+      logo: "https://res.cloudinary.com/dcyhxj1nn/image/upload/v1754487347/clunia_mclsrp.png",
       flyer:
-        "https://res.cloudinary.com/dabgfr6qn/image/upload/v1743083254/flyer/clunia-flyer.jpg",
+        "https://res.cloudinary.com/dcyhxj1nn/image/upload/v1754487350/clunia-flyer_bbqoan.jpg",
         href: "https://www.bodegasclunia.com/"
     },
   ];

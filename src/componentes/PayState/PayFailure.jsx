@@ -11,7 +11,7 @@ export const PayFailure = () => {
 
     return (
         <main className="pay">
-                <img className='pay-img' alt="pago-rechazado" src='https://res.cloudinary.com/dabgfr6qn/image/upload/v1744660541/flyer/veuuf3liof5csylzfrqt.jpg'/>
+                <img className='pay-img' alt="pago-rechazado" src='https://res.cloudinary.com/dcyhxj1nn/image/upload/v1754487351/veuuf3liof5csylzfrqt_dwa8kk.jpg'/>
                 <div className="pay-container pay-failure">
                         <p className="pay-title">TU PAGO A SIDO RECHAZADO</p>
                         <div className="pay-box">

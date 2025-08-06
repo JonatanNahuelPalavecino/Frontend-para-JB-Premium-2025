@@ -21,7 +21,7 @@ export const DetailEnvio = () => {
                     <p className="detail-envioDesc">Para envíos al interior despachamos por encomiendas (a coordinar) a cualquier punto de la Republica Argentina a cargo del comprador, y los tiempos de entrega dependen del lugar de destino. Para su seguimiento, JB Premium le enviará un N° de guía con el que podrá ver el status de su envío. Sus productos son despachados de manera segura y discreta.</p>
                 </div>
                 <div className="detail-envio-box">
-                    <img className="detail-envio-img" src="https://res.cloudinary.com/dabgfr6qn/image/upload/v1745278174/flyer/m4yo6kpmndysxxardiwd.png" alt="mapa"/>
+                    <img className="detail-envio-img" src="https://res.cloudinary.com/dcyhxj1nn/image/upload/v1754487350/m4yo6kpmndysxxardiwd_tyfawm.png" alt="mapa"/>
                 </div>
             </div>
             <div className="detail-envio-btns">
