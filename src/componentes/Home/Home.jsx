@@ -45,7 +45,7 @@ export const Home = () => {
           options={{
             type: "loop",
             perPage: 1,
-            autoplay: true,
+            // autoplay: true,
             pauseOnFocus: false,
             pauseOnHover: false,
             interval: 4000,
@@ -61,7 +61,7 @@ export const Home = () => {
                   alt={producto.nombre}
                   className="sliderPromo-img"
                 />
-                {producto.stock_disponible && (
+                {producto.stock_disponible > 0 && (
                   <Link
                     className="sliderPromo-btn"
                     to={`/detalle/${producto.productoId}`}

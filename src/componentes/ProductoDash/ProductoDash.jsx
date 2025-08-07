@@ -31,9 +31,11 @@ export const ProductoDash = ({
           </div>
         ))
       ) : error ? (
-        <li>Hubo un problemas con el servidor. Intente mas tarde</li>
+        <li className="productDash-desc">Hubo un problemas con el servidor. Intente mas tarde</li>
       ) : products?.length === 0 ? (
-        <li>No se encontraron resultados</li>
+        <li className="productDash-desc">No se encontraron resultados</li>
+      ) : !products ? (
+        <li className="productDash-desc">No se encontraron resultados</li>
       ) : (
         products?.map((product) => (
           <li key={product?.productoId} className="productDash">
@@ -102,7 +104,9 @@ export const ProductoDash = ({
               <div className="productDash-box">
                 <p className="productDash-title">Stock Total</p>
                 <p className="productDash-desc">
-                  {product?.stock_total ? `${product?.stock_total} unidad/es` : "Sin Datos ❌"}
+                  {product?.stock_total
+                    ? `${product?.stock_total} unidad/es`
+                    : "Sin Datos ❌"}
                 </p>
               </div>
               <div className="productDash-box">

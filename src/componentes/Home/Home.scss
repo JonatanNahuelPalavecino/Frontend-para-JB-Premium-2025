@@ -1,12 +1,15 @@
 .sliderPromo {
   margin: 4rem auto 2rem;
-  max-width: 1280px;
   width: 100%;
   background: radial-gradient(circle,rgba(0, 0, 0, 1) 45%, rgba(106, 27, 26, 1) 93%);
   padding: 2rem;
 
+  @media (max-width: 550px) {
+    padding: 1rem 2rem;
+  }
+
   &-item {
-    height: 400px;
+    max-height: 400px;
     display: flex;
     justify-content: center;
     align-items: center;
