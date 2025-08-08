@@ -4,6 +4,7 @@ import "./TransactionDash.scss";
 import { Transaction } from "../Transaction/Transaction";
 import useForm from "../Hooks/useForm";
 import { estadoDePago } from "../utils/datos/pay";
+import { SkeletonComponent } from "../SkeletonComponent/SkeletonComponent";
 
 export const TransactionDash = () => {
   const [filters, setFilters] = useState({});
@@ -77,99 +78,131 @@ export const TransactionDash = () => {
           <span className="transactionDash-boxTitulo">
             Total de Transacciones
           </span>
-          <span className="transactionDash-boxNumero">
-            {allTransactions.length}
-          </span>
+          {isLoading ? (
+            <SkeletonComponent width={"100%"} height={"38px"} />
+          ) : (
+            <span className="transactionDash-boxNumero">
+              {allTransactions.length}
+            </span>
+          )}
         </div>
         <div className="transactionDash-box transactionDash-boxOtherColor">
           <span className="transactionDash-boxTitulo">
             Total de Transacciones Acreditadas
           </span>
-          <span className="transactionDash-boxNumero">
-            {allTransactions.filter((tx) => tx.estado === "approved").length}
-          </span>
+          {isLoading ? (
+            <SkeletonComponent width={"100%"} height={"38px"} />
+          ) : (
+            <span className="transactionDash-boxNumero">
+              {allTransactions.filter((tx) => tx.estado === "approved").length}
+            </span>
+          )}
         </div>
         <div className="transactionDash-box">
           <span className="transactionDash-boxTitulo">
             Total de Transacciones Rechazadas
           </span>
-          <span className="transactionDash-boxNumero">
-            {allTransactions.filter((tx) => tx.estado === "rejected").length}
-          </span>
+          {isLoading ? (
+            <SkeletonComponent width={"100%"} height={"38px"} />
+          ) : (
+            <span className="transactionDash-boxNumero">
+              {allTransactions.filter((tx) => tx.estado === "rejected").length}
+            </span>
+          )}
         </div>
         <div className="transactionDash-box transactionDash-boxOtherColor">
           <span className="transactionDash-boxTitulo">
             Total de Transacciones Pendientes de Pago
           </span>
-          <span className="transactionDash-boxNumero">
-            {
-              allTransactions.filter(
-                (tx) => tx.estado === "in_process" || tx.estado === "pending"
-              ).length
-            }
-          </span>
+          {isLoading ? (
+            <SkeletonComponent width={"100%"} height={"38px"} />
+          ) : (
+            <span className="transactionDash-boxNumero">
+              {
+                allTransactions.filter(
+                  (tx) => tx.estado === "in_process" || tx.estado === "pending"
+                ).length
+              }
+            </span>
+          )}
         </div>
         <div className="transactionDash-box">
           <span className="transactionDash-boxTitulo">
             Total de Ingresos Brutos en Pesos
           </span>
-          <span className="transactionDash-boxNumero">
-            AR${" "}
-            {allTransactions
-              .reduce(
-                (acc, t) =>
-                  t.pagoRecibido > 0 && t.moneda === "ARS"
-                    ? acc + t.pagoBruto
-                    : acc,
-                0
-              )
-              .toLocaleString("es-ES")}
-          </span>
+          {isLoading ? (
+            <SkeletonComponent width={"100%"} height={"38px"} />
+          ) : (
+            <span className="transactionDash-boxNumero">
+              AR${" "}
+              {allTransactions
+                .reduce(
+                  (acc, t) =>
+                    t.pagoRecibido > 0 && t.moneda === "ARS"
+                      ? acc + t.pagoBruto
+                      : acc,
+                  0
+                )
+                .toLocaleString("es-ES")}
+            </span>
+          )}
         </div>
         <div className="transactionDash-box transactionDash-boxOtherColor">
           <span className="transactionDash-boxTitulo">
             Total de Ingresos Netos en Pesos
           </span>
-          <span className="transactionDash-boxNumero">
-            AR${" "}
-            {allTransactions
-              .reduce(
-                (acc, t) => (t.moneda === "ARS" ? acc + t.pagoRecibido : acc),
-                0
-              )
-              .toLocaleString("es-ES")}
-          </span>
+          {isLoading ? (
+            <SkeletonComponent width={"100%"} height={"38px"} />
+          ) : (
+            <span className="transactionDash-boxNumero">
+              AR${" "}
+              {allTransactions
+                .reduce(
+                  (acc, t) => (t.moneda === "ARS" ? acc + t.pagoRecibido : acc),
+                  0
+                )
+                .toLocaleString("es-ES")}
+            </span>
+          )}
         </div>
         <div className="transactionDash-box">
           <span className="transactionDash-boxTitulo">
             Total de Ingresos Brutos en Dolares
           </span>
-          <span className="transactionDash-boxNumero">
-            U$S{" "}
-            {allTransactions
-              .reduce(
-                (acc, t) =>
-                  t.pagoRecibido > 0 && t.moneda === "USD"
-                    ? acc + t.pagoBruto
-                    : acc,
-                0
-              )
-              .toLocaleString("es-ES")}
-          </span>
+          {isLoading ? (
+            <SkeletonComponent width={"100%"} height={"38px"} />
+          ) : (
+            <span className="transactionDash-boxNumero">
+              U$S{" "}
+              {allTransactions
+                .reduce(
+                  (acc, t) =>
+                    t.pagoRecibido > 0 && t.moneda === "USD"
+                      ? acc + t.pagoBruto
+                      : acc,
+                  0
+                )
+                .toLocaleString("es-ES")}
+            </span>
+          )}
         </div>
         <div className="transactionDash-box transactionDash-boxOtherColor">
           <span className="transactionDash-boxTitulo">
             Total de Ingresos Netos en Dolares
           </span>
-          <span className="transactionDash-boxNumero">
-            U$S{" "}
-            {allTransactions
-              .reduce(
-                (acc, t) => (t.moneda === "USD" ? acc + t.pagoRecibido : acc),
-                0
-              )
-              .toLocaleString("es-ES")}
-          </span>
+          {isLoading ? (
+            <SkeletonComponent width={"100%"} height={"38px"} />
+          ) : (
+            <span className="transactionDash-boxNumero">
+              U$S{" "}
+              {allTransactions
+                .reduce(
+                  (acc, t) => (t.moneda === "USD" ? acc + t.pagoRecibido : acc),
+                  0
+                )
+                .toLocaleString("es-ES")}
+            </span>
+          )}
         </div>
       </div>
 

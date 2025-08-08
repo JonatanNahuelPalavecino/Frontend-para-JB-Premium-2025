@@ -11,6 +11,7 @@ export const OrdersDash = () => {
   const [orders, setOrders] = useState([]);
   const [allOrders, setAllOrders] = useState([]);
   const [filters, setFilters] = useState({});
+  const [reload, setReload] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const { user } = useContext(Context);
@@ -74,7 +75,7 @@ export const OrdersDash = () => {
       "Gestión de Ordenes de Compra - JB Premium - Vinos Españoles - Distribuidor Oficial";
     fetchOrders(filters, setOrders, setUniqueUsers);
     fetchOrders(filters, setAllOrders);
-  }, [filters]);
+  }, [filters, reload]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -102,36 +103,54 @@ export const OrdersDash = () => {
       <div className="ordersDash-content">
         <div className="ordersDash-box">
           <span className="ordersDash-boxTitulo">Total de Ordenes</span>
-          <span className="ordersDash-boxNumero">{allOrders?.length || 0}</span>
+          {isLoading ? (
+            <SkeletonComponent width={"100%"} height={"38px"} />
+          ) : (
+            <span className="ordersDash-boxNumero">
+              {allOrders?.length || 0}
+            </span>
+          )}
         </div>
         <div className="ordersDash-box ordersDash-boxOtherColor">
           <span className="ordersDash-boxTitulo">
             Total de Ordenes Abonadas
           </span>
-          <span className="ordersDash-boxNumero">
-            {allOrders?.filter((order) => order?.estado === "approved")
-              .length || 0}
-          </span>
+          {isLoading ? (
+            <SkeletonComponent width={"100%"} height={"38px"} />
+          ) : (
+            <span className="ordersDash-boxNumero">
+              {allOrders?.filter((order) => order?.estado === "approved")
+                .length || 0}
+            </span>
+          )}
         </div>
         <div className="ordersDash-box">
           <span className="ordersDash-boxTitulo">
             Total de Ordenes Pendientes de Pago
           </span>
-          <span className="ordersDash-boxNumero">
-            {allOrders?.filter(
-              (order) =>
-                order?.estado === "pending" || order?.estado === "in_process"
-            ).length || 0}
-          </span>
+          {isLoading ? (
+            <SkeletonComponent width={"100%"} height={"38px"} />
+          ) : (
+            <span className="ordersDash-boxNumero">
+              {allOrders?.filter(
+                (order) =>
+                  order?.estado === "pending" || order?.estado === "in_process"
+              ).length || 0}
+            </span>
+          )}
         </div>
         <div className="ordersDash-box ordersDash-boxOtherColor">
           <span className="ordersDash-boxTitulo">
             Total de Ordenes Rechazadas
           </span>
-          <span className="ordersDash-boxNumero">
-            {allOrders?.filter((order) => order?.estado === "rejected")
-              .length || 0}
-          </span>
+          {isLoading ? (
+            <SkeletonComponent width={"100%"} height={"38px"} />
+          ) : (
+            <span className="ordersDash-boxNumero">
+              {allOrders?.filter((order) => order?.estado === "rejected")
+                .length || 0}
+            </span>
+          )}
         </div>
       </div>
       <form className="ordersDash-form" onSubmit={handleSubmit}>
@@ -300,6 +319,7 @@ export const OrdersDash = () => {
               key={order?.orderId}
               {...order}
               {...order?.user}
+              setReload={setReload}
               type={user?.rol}
             />
           ))

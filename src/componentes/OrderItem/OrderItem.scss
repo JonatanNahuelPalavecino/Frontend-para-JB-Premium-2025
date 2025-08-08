@@ -154,6 +154,12 @@
   &-modal {
     padding: 1rem;
 
+    &Title {
+          font-family: "Roboto", sans-serif;
+    font-weight: bold;
+    padding: 1.5rem 0;
+    }
+
     &Btns {
       width: 100%;
       display: flex;

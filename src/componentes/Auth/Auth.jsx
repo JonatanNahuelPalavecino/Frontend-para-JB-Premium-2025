@@ -64,7 +64,7 @@ export const Auth = ({ type }) => {
     if (data.estado === "error") {
       toast.error(data.mensaje);
       console.log(data);
-      if (!data.mensaje === "El usuario está desactivado.") {
+      if (data.mensaje === "El usuario está desactivado.") {
         setMail(data.email);
         setOpen(true);
       }

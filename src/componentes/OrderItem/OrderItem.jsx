@@ -198,7 +198,7 @@ export const OrderItem = ({
       </div>
       <ModalContainer open={open} onClose={() => setOpen(false)}>
         <div className="order-modal">
-          <p className="order-title">
+          <p className="order-modalTitle">
             ¿Estás seguro que querés eliminar la orden <b>{orderId}</b>?
           </p>
           <div className="order-modalBtns">

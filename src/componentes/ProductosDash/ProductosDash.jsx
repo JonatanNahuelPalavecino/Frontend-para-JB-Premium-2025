@@ -7,6 +7,7 @@ import { ModalContainer } from "../ModalContainer/ModalContainer";
 import { ProductoDash } from "../ProductoDash/ProductoDash";
 import { deleteProduct } from "../utils/peticiones/deleteProduct";
 import { useNavigate } from "react-router-dom";
+import { SkeletonComponent } from "../SkeletonComponent/SkeletonComponent";
 
 export const ProductosDash = () => {
   const { setLoading } = useContext(Context);
@@ -18,7 +19,7 @@ export const ProductosDash = () => {
   const [open, setOpen] = useState(false);
   const [productSelected, setProductSelected] = useState(null);
   const [type, setType] = useState(null);
-  const [reload, setReload] = useState(false)
+  const [reload, setReload] = useState(false);
 
   const initialState = {
     nombre: "",
@@ -31,7 +32,7 @@ export const ProductosDash = () => {
   const { state, onInputChange, onResetForm } = useForm(initialState); // Añadir resetForm del hook
 
   const { nombre, activo, accesorio, porcDesc, destacado } = state;
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const fetchProducts = async (filters = {}) => {
     setIsLoading(true);
@@ -51,7 +52,8 @@ export const ProductosDash = () => {
   };
 
   useEffect(() => {
-    document.title = "Gestión de Productos - JB Premium - Vinos Españoles - Distribuidor Oficial";
+    document.title =
+      "Gestión de Productos - JB Premium - Vinos Españoles - Distribuidor Oficial";
     fetchProducts(filters);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filters, reload]);
@@ -69,21 +71,24 @@ export const ProductosDash = () => {
   };
 
   const handleDelete = () => {
-    deleteProduct(productSelected?.productoId, setLoading)
-      .then(() => {
-        setOpen(false)
-        setReload(!reload)
-      })
-  }
+    deleteProduct(productSelected?.productoId, setLoading).then(() => {
+      setOpen(false);
+      setReload(!reload);
+    });
+  };
 
   return (
     <>
       <section className="productsDash">
         <h2 className="productsDash-title">Crea tu Producto</h2>
         <div className="productsDash-content">
-            <button onClick={() => navigate("/dashboard/crear-producto")} className="productsDash-btn" type="button">
-              Crear
-            </button>
+          <button
+            onClick={() => navigate("/dashboard/crear-producto")}
+            className="productsDash-btn"
+            type="button"
+          >
+            Crear
+          </button>
         </div>
       </section>
       <section className="productsDash">
@@ -93,39 +98,59 @@ export const ProductosDash = () => {
             <span className="productsDash-boxTitulo">
               Total de productos Registrados
             </span>
-            <span className="productsDash-boxNumero">
-              {allProducts?.length}
-            </span>
+            {isLoading ? (
+              <SkeletonComponent width={"100%"} height={"38px"} />
+            ) : (
+              <span className="productsDash-boxNumero">
+                {allProducts?.length}
+              </span>
+            )}
           </div>
           <div className="productsDash-box productsDash-boxOtherColor">
             <span className="productsDash-boxTitulo">
               Total de Productos Activos
             </span>
-            <span className="productsDash-boxNumero">
-              {allProducts?.filter((product) => product?.activo).length}
-            </span>
+            {isLoading ? (
+              <SkeletonComponent width={"100%"} height={"38px"} />
+            ) : (
+              <span className="productsDash-boxNumero">
+                {allProducts?.filter((product) => product?.activo).length}
+              </span>
+            )}
           </div>
           <div className="productsDash-box">
             <span className="productsDash-boxTitulo">
               Total de Productos Inactivados
             </span>
-            <span className="productsDash-boxNumero">
-              {allProducts?.filter((product) => !product?.activo).length}
-            </span>
+            {isLoading ? (
+              <SkeletonComponent width={"100%"} height={"38px"} />
+            ) : (
+              <span className="productsDash-boxNumero">
+                {allProducts?.filter((product) => !product?.activo).length}
+              </span>
+            )}
           </div>
           <div className="productsDash-box productsDash-boxOtherColor">
             <span className="productsDash-boxTitulo">
               Total de Productos con Descuento
             </span>
-            <span className="productsDash-boxNumero">
-              {allProducts?.filter((product) => product?.porcDesc > 0).length}
-            </span>
+            {isLoading ? (
+              <SkeletonComponent width={"100%"} height={"38px"} />
+            ) : (
+              <span className="productsDash-boxNumero">
+                {allProducts?.filter((product) => product?.porcDesc > 0).length}
+              </span>
+            )}
           </div>
           <div className="productsDash-box">
             <span className="productsDash-boxTitulo">Total de Accesorios</span>
-            <span className="productsDash-boxNumero">
-              {allProducts?.filter((product) => product?.accesorio).length}
-            </span>
+            {isLoading ? (
+              <SkeletonComponent width={"100%"} height={"38px"} />
+            ) : (
+              <span className="productsDash-boxNumero">
+                {allProducts?.filter((product) => product?.accesorio).length}
+              </span>
+            )}
           </div>
         </div>
         <form className="productsDash-form" onSubmit={handleSubmit}>
@@ -275,10 +300,14 @@ export const ProductosDash = () => {
         ) : (
           <div className="productsDash-modal">
             <p className="productsDash-modalTitle">
-              ¿Estás seguro que querés eliminar el producto <b>{productSelected?.nombre}</b>?
+              ¿Estás seguro que querés eliminar el producto{" "}
+              <b>{productSelected?.nombre}</b>?
             </p>
             <div className="productsDash-modalBtns">
-              <button onClick={() => setOpen(false)} className="productsDash-modalBtn">
+              <button
+                onClick={() => setOpen(false)}
+                className="productsDash-modalBtn"
+              >
                 Cancelar
               </button>
               <button
@@ -294,7 +323,6 @@ export const ProductosDash = () => {
     </>
   );
 };
-
 
 //AGREGAR FUNCION PARA ELIMINAR EL PRODUCTO Y CREAR UN PRODUCTO
 //AGREGAR COMPONENTE Y FUNCION QUE ME LLEVE A MODIFICAR EL PRODUCTO

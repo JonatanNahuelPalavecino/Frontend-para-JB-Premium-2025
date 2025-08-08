@@ -50,6 +50,9 @@
     @media (max-width: 650px) {
       width: 400px;
     }
+    @media (max-width: 450px) {
+      width: 300px;
+    }
   }
 
   &-section {
@@ -176,6 +179,8 @@
   }
 
   &-total {
+    position: sticky;
+    top: 1rem;
     display: flex;
     flex-direction: column;
     align-self: flex-start;
@@ -303,6 +308,10 @@
 
     @media (max-width: 601px) {
       min-width: 350px;
+    }
+
+    @media (max-width: 550px) {
+      min-width: 325px;
     }
   }
 }

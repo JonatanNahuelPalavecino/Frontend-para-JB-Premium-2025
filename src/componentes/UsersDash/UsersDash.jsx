@@ -8,6 +8,7 @@ import { Context } from "../Context/Context";
 import { activateUser } from "../utils/peticiones/activateUser";
 import { toast } from "sonner";
 import { desactivateUser } from "../utils/peticiones/desactivateUser";
+import { SkeletonComponent } from "../SkeletonComponent/SkeletonComponent";
 
 export const UsersDash = () => {
   const { setLoading } = useContext(Context);
@@ -47,8 +48,8 @@ export const UsersDash = () => {
 
   useEffect(() => {
     fetchUsers(filters);
-      document.title = "Gestión de Usuarios - JB Premium - Vinos Españoles - Distribuidor Oficial";
-
+    document.title =
+      "Gestión de Usuarios - JB Premium - Vinos Españoles - Distribuidor Oficial";
   }, [filters]);
 
   const handleSubmit = (e) => {
@@ -100,23 +101,35 @@ export const UsersDash = () => {
             <span className="usersDash-boxTitulo">
               Total de Usuarios Registrados
             </span>
-            <span className="usersDash-boxNumero">{allUsers?.length}</span>
+            {isLoading ? (
+              <SkeletonComponent width={"100%"} height={"38px"} />
+            ) : (
+              <span className="usersDash-boxNumero">{allUsers?.length}</span>
+            )}
           </div>
           <div className="usersDash-box usersDash-boxOtherColor">
             <span className="usersDash-boxTitulo">
               Total de Usuarios Activos
             </span>
-            <span className="usersDash-boxNumero">
-              {allUsers?.filter((user) => user?.orders?.length > 0).length}
-            </span>
+            {isLoading ? (
+              <SkeletonComponent width={"100%"} height={"38px"} />
+            ) : (
+              <span className="usersDash-boxNumero">
+                {allUsers?.filter((user) => user?.orders?.length > 0).length}
+              </span>
+            )}
           </div>
           <div className="usersDash-box">
             <span className="usersDash-boxTitulo">
               Total de Usuarios Desactivados
             </span>
-            <span className="usersDash-boxNumero">
-              {allUsers?.filter((user) => !user?.activo).length}
-            </span>
+            {isLoading ? (
+              <SkeletonComponent width={"100%"} height={"38px"} />
+            ) : (
+              <span className="usersDash-boxNumero">
+                {allUsers?.filter((user) => !user?.activo).length}
+              </span>
+            )}
           </div>
         </div>
         <form className="usersDash-form" onSubmit={handleSubmit}>
