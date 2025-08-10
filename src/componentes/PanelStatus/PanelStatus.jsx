@@ -94,17 +94,17 @@ export const PanelStatus = () => {
           { name: "Total de Transacciones", dato: transactions?.length },
           {
             name: "Acreditados",
-            dato: transactions?.filter((t) => t?.estado === "approved").length,
+            dato: transactions?.filter((t) => t?.estado === "approved").length || 0,
           },
           {
             name: "Pendiente de Pago",
             dato: transactions?.filter(
               (t) => t?.estado === "pending" || t?.estado === "in_process"
-            ).length,
+            ).length || 0,
           },
           {
             name: "Rechazadas",
-            dato: transactions?.filter((t) => t?.estado === "rejected").length,
+            dato: transactions?.filter((t) => t?.estado === "rejected").length || 0,
           },
           {
             name: "Ingresos Brutos en Pesos",
@@ -116,7 +116,7 @@ export const PanelStatus = () => {
                     : acc,
                 0
               )
-              .toLocaleString("es-ES")}`,
+              .toLocaleString("es-ES")}` || 0,
           },
           {
             name: "Ingresos Netos en Pesos",
@@ -125,7 +125,7 @@ export const PanelStatus = () => {
                 (acc, t) => (t.moneda === "ARS" ? acc + t?.pagoRecibido : acc),
                 0
               )
-              .toLocaleString("es-ES")}`,
+              .toLocaleString("es-ES")}` || 0,
           },
           {
             name: "Ingresos Brutos en Dolares",
@@ -137,7 +137,7 @@ export const PanelStatus = () => {
                     : acc,
                 0
               )
-              .toLocaleString("es-ES")}`,
+              .toLocaleString("es-ES")}` || 0,
           },
           {
             name: "Ingresos Netos en Dolares",
@@ -146,7 +146,7 @@ export const PanelStatus = () => {
                 (acc, t) => (t.moneda === "USD" ? acc + t?.pagoRecibido : acc),
                 0
               )
-              .toLocaleString("es-ES")}`,
+              .toLocaleString("es-ES")}` || 0,
           },
         ],
         href: "/dashboard/transacciones",
