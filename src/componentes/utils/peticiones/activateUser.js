@@ -1,4 +1,4 @@
-export const activateUser = async (email, setLoading) => {
+export const activateUser = async (email, user, setLoading) => {
     setLoading(true)
     const url = import.meta.env.VITE_SERVER
     try {
@@ -6,7 +6,7 @@ export const activateUser = async (email, setLoading) => {
             method: "PATCH",
             headers: {"Content-Type": "application/json"},
             credentials: "include",
-            body: JSON.stringify({email})
+            body: JSON.stringify({email, user})
         })
         const data = await response.json()
 

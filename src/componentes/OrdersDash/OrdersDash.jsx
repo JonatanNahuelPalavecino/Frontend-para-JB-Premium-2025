@@ -86,6 +86,9 @@ export const OrdersDash = () => {
     } else if (state.telefono) {
       state["o.telefono"] = state.telefono;
       delete state.telefono;
+    } else if (state.orderId) {
+      state["o.orderId"] = state.orderId
+      delete state.orderId
     }
 
     setFilters(state);

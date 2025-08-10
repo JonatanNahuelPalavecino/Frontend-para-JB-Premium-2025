@@ -52,7 +52,7 @@ export const User = ({ users, isLoading, error, setUserSelected, setOpen }) => {
               <p className="user-title">Rol</p>
               <p className="user-desc">{user.rol}</p>
             </div>
-            {user.activo ? (
+            {user.activo === 1 ? (
               <button className="user-btn user-btnOtherColor" onClick={() => handleClick(user)}>Desactivar</button>
             ) : (
               <button className="user-btn" onClick={() => handleClick(user)}>Activar</button>

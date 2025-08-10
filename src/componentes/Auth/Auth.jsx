@@ -82,7 +82,7 @@ export const Auth = ({ type }) => {
   };
 
   const handleActivateUser = async () => {
-    const data = await activateUser(mail, setLoading);
+    const data = await activateUser(mail, null, setLoading);
 
     if (data.estado === "error") {
       toast.error(data.mensaje);

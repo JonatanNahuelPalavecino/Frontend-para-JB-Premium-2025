@@ -11,7 +11,7 @@ import { desactivateUser } from "../utils/peticiones/desactivateUser";
 import { SkeletonComponent } from "../SkeletonComponent/SkeletonComponent";
 
 export const UsersDash = () => {
-  const { setLoading } = useContext(Context);
+  const { setLoading, user } = useContext(Context);
   const [users, setUsers] = useState([]); // Inicializar como array vacío
   const [allUsers, setAllUsers] = useState([]); // Nuevo estado para guardar todos los usuarios
   const [error, setError] = useState(null);
@@ -59,7 +59,8 @@ export const UsersDash = () => {
   };
 
   const activarUsuario = async (email, setLoading) => {
-    const res = await activateUser(email, setLoading);
+    console.log(user)
+    const res = await activateUser(email, user.email, setLoading);
     if (res.estado === "error") {
       toast.error(res.mensaje);
       return;
