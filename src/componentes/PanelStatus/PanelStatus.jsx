@@ -91,7 +91,7 @@ export const PanelStatus = () => {
       {
         name: "Transacciones",
         dato: [
-          { name: "Total de Transacciones", dato: transactions?.length },
+          { name: "Total de Transacciones", dato: transactions?.length || 0 },
           {
             name: "Acreditados",
             dato: transactions?.filter((t) => t?.estado === "approved").length || 0,
@@ -111,7 +111,7 @@ export const PanelStatus = () => {
             dato: `AR$ ${transactions
               ?.reduce(
                 (acc, t) =>
-                  t?.pagoRecibido > 0 && t.moneda === "ARS"
+                  t?.pagoRecibido > 0 && t?.moneda === "ARS"
                     ? acc + t?.pagoBruto
                     : acc,
                 0
@@ -122,7 +122,7 @@ export const PanelStatus = () => {
             name: "Ingresos Netos en Pesos",
             dato: `AR$ ${transactions
               ?.reduce(
-                (acc, t) => (t.moneda === "ARS" ? acc + t?.pagoRecibido : acc),
+                (acc, t) => (t?.moneda === "ARS" ? acc + t?.pagoRecibido : acc),
                 0
               )
               .toLocaleString("es-ES")}` || 0,
@@ -132,7 +132,7 @@ export const PanelStatus = () => {
             dato: `U$S ${transactions
               ?.reduce(
                 (acc, t) =>
-                  t?.pagoRecibido > 0 && t.moneda === "USD"
+                  t?.pagoRecibido > 0 && t?.moneda === "USD"
                     ? acc + t?.pagoBruto
                     : acc,
                 0
@@ -143,7 +143,7 @@ export const PanelStatus = () => {
             name: "Ingresos Netos en Dolares",
             dato: `U$S ${transactions
               ?.reduce(
-                (acc, t) => (t.moneda === "USD" ? acc + t?.pagoRecibido : acc),
+                (acc, t) => (t?.moneda === "USD" ? acc + t?.pagoRecibido : acc),
                 0
               )
               .toLocaleString("es-ES")}` || 0,
